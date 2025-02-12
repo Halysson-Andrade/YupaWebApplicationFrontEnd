@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "projeto-front-tlp": {
+    "projeto-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/projeto-front-tlp",
+            "outputPath": "dist/projeto-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -67,67 +67,19 @@
                 }
               ]
             },
-            "tlp": {
+            "almani": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-tlp/environment.tlp.ts"
+                  "with": "src/environments/clients/client-almani/environment.almani.ts"
                 }
               ]
             },
-            "tlp-prod": {
+            "almani-prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-tlp/environment.tlp.prod.ts"
-                }
-              ]
-            },
-            "vexia": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-vexia/environment.vexia.ts"
-                }
-              ]
-            },
-            "vexia-prod": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-vexia/environment.vexia.prod.ts"
-                }
-              ]
-            },
-            "adeste": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-adeste/environment.adeste.ts"
-                }
-              ]
-            },
-            "adeste-prod": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-adeste/environment.adeste.prod.ts"
-                }
-              ]
-            },
-            "apple": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-apple/environment.apple.ts"
-                }
-              ]
-            },
-            "apple-prod": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-apple/environment.apple.prod.ts"
+                  "with": "src/environments/clients/client-almani/environment.almani.prod.ts"
                 }
               ]
             }
@@ -138,34 +90,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "projeto-front-tlp:build:production"
+              "buildTarget": "projeto-front:build:production"
             },
             "development": {
-              "buildTarget": "projeto-front-tlp:build:development"
+              "buildTarget": "projeto-front:build:development"
             },
-            "tlp": {
-              "buildTarget": "projeto-front-tlp:build:tlp"
+            "almani": {
+              "buildTarget": "projeto-front:build:almani"
             },
-            "tlp-prod": {
-              "buildTarget": "projeto-front-tlp:build:tlp-prod"
-            },
-            "vexia": {
-              "buildTarget": "projeto-front-tlp:build:vexia"
-            },
-            "vexia-prod": {
-              "buildTarget": "projeto-front-tlp:build:vexia-prod"
-            },
-            "adeste": {
-              "buildTarget": "projeto-front-tlp:build:adeste"
-            },
-            "adeste-prod": {
-              "buildTarget": "projeto-front-tlp:build:adeste-prod"
-            },
-            "apple": {
-              "buildTarget": "projeto-front-tlp:build:apple"
-            },
-            "apple-prod": {
-              "buildTarget": "projeto-front-tlp:build:apple-prod"
+            "almani-prod": {
+              "buildTarget": "projeto-front:build:almani-prod"
             }
           },
           "defaultConfiguration": "development"
@@ -173,7 +107,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "projeto-front-tlp:build"
+            "buildTarget": "projeto-front:build"
           }
         },
         "test": {
