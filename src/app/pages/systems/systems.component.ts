@@ -20,7 +20,7 @@ export class SystemsComponent {
   environment = environment;
   errorMessage: string = '';
   crudConfig: CRUDInterface = {  // Objeto de configuração
-    theme: 'Adeste',
+    theme: 'almani',
     page: 'Sistemas',
     modal: 'system-modal',
     token: '',

@@ -22,7 +22,7 @@ export class CustomUsersComponent {
   environment = environment;
   errorMessage: string = '';
   crudConfig: CRUDInterface = {  // Objeto de configuração
-    theme: 'Adeste',
+    theme: 'almani',
     page: 'Usuários',
     modal: 'Custom-Users',
     token: '',

@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/adeste",
-            "baseHref": "/adeste/",
+            "outputPath": "dist/almani",
+            "baseHref": "/almani/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -100,19 +100,19 @@
                 }
               ]
             },
-            "adeste": {
+            "almani": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-adeste/environment.adeste.ts"
+                  "with": "src/environments/clients/client-almani/environment.almani.ts"
                 }
               ]
             },
-            "adeste-prod": {
+            "almani-prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/clients/client-adeste/environment.adeste.prod.ts"
+                  "with": "src/environments/clients/client-almani/environment.almani.prod.ts"
                 }
               ]
             },
@@ -156,11 +156,11 @@
             "vexia-prod": {
               "buildTarget": "projeto-front:build:vexia-prod"
             },
-            "adeste": {
-              "buildTarget": "projeto-front:build:adeste"
+            "almani": {
+              "buildTarget": "projeto-front:build:almani"
             },
-            "adeste-prod": {
-              "buildTarget": "projeto-front:build:adeste-prod"
+            "almani-prod": {
+              "buildTarget": "projeto-front:build:almani-prod"
             },
             "apple": {
               "buildTarget": "projeto-front:build:apple"
