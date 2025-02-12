@@ -3,67 +3,52 @@
 .login-container {
   display: flex;
   align-items: center;
-  align-items: center;
+  justify-content: center;
   flex-direction: column;
   height: 100vh;
+  padding: 1rem;
 
   .container-logo {
-    padding: 3rem 0rem;
+    padding: 2rem 0;
 
     .logo-client {
-      width: 200px;
+      width: 120px;
       max-width: 100%;
       height: auto;
     }
   }
 
   .container-gradient {
-    border-radius: 3.5rem;
+    border-radius: 2.5rem;
     padding: 0.3rem;
+    width: 100%;
+    max-width: 600px;
     background: linear-gradient(180deg, var(--primaryColor) 10%, rgba(0, 0, 0, 0) 30%);
-
+    
     .container-form {
-      width: 610px;
-      max-width: 100%;
-      border-radius: 3.31rem;
+      width: 100%;
+      border-radius: 2.5rem;
       background-color: $white;
-      padding: 3.5rem 5rem;
+      padding: 2rem;
       display: flex;
-      align-items: stretch;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
       
       .form-header {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-
+        text-align: center;
         .header-title {
           color: #18181b;
-          position: relative;
-          width: fit-content;
-
-          // &::after {
-          //   content: "";
-          //   width: 10px;
-          //   height: 10px;
-          //   position: absolute;
-          //   bottom: 10px;
-          //   right: -12px;
-          //   background-color: var(--primaryColor);
-          //   border-radius: 50%;
-          // }
+          font-size: 1.8rem;
         }
-
         .header-subtitle {
           color: #52525b;
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
       }
 
       .form-group {
         position: relative;
-        
+
         app-input {
           width: 100%;
         }
@@ -80,11 +65,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
 
         .esqueceu-senha {
           font-size: 1rem;
           color: var(--primaryColor);
           cursor: pointer;
+          text-decoration: none;
         }
       }
 
@@ -99,5 +86,71 @@
       }
     }
   }
+}
 
+/* 📌 Responsividade para Tablets */
+@media screen and (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+
+    .container-gradient {
+      max-width: 90%;
+      border-radius: 2rem;
+    }
+
+    .container-form {
+      padding: 2rem;
+      border-radius: 2rem;
+    }
+  }
+}
+
+/* 📌 Responsividade para Mobile */
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 0.5rem;
+    justify-content: flex-start;
+  }
+
+  .container-logo {
+    padding: 1.5rem 0;
+    
+    .logo-client {
+      width: 100px;
+    }
+  }
+
+  .container-gradient {
+    max-width: 100%;
+    padding: 0.2rem;
+    border-radius: 1.5rem;
+  }
+
+  .container-form {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+
+    .header-title {
+      font-size: 1.5rem;
+    }
+
+    .header-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .form-group-inline {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .esqueceu-senha {
+      font-size: 0.9rem;
+    }
+
+    .btn-submit {
+      font-size: 1rem;
+    }
+  }
 }

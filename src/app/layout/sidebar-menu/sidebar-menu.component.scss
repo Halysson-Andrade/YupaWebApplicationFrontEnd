@@ -14,13 +14,14 @@
       height: 90px;
       padding: 0rem 1rem;
       display: flex;
-      flex-direction: column;
+      flex-direction: center;
       justify-content: center;
 
       .logo-client {
-        width: 130px;
+        width: 60px;
         max-width: 90%;
         height: auto;
+        align-items: center;
       }
     }
 
