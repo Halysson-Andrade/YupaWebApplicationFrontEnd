@@ -8,10 +8,6 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { LoginGuard } from './core/guard/login.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { ChartsComponent } from './pages/charts/charts.component';
-import { CompanieComponent } from './pages/companie/companie.component';
-import { AutomationsComponent } from './pages/automations/automations.component';
-import { BorrowersComponent } from './pages/borrowers/borrowers.component';
-import { BranchesComponent } from './pages/branches/branches.component';
 import { ImportsComponent } from './pages/imports/imports.component';
 
 
@@ -43,35 +39,10 @@ const routes: Routes = [
       },
       { path: '', redirectTo: 'charts', pathMatch: 'full' },
       {
-        path: 'companies',
-        component: CompanieComponent,
-      },
-      { path: '', redirectTo: 'companies', pathMatch: 'full' },
-      { path: '', redirectTo: 'charts', pathMatch: 'full' },
-      {
-        path: 'branches',
-        component: BranchesComponent,
-      },
-      { path: '', redirectTo: 'branches', pathMatch: 'full' },
-      { path: '', redirectTo: 'charts', pathMatch: 'full' },
-      {
-        path: 'borrowers',
-        component: BorrowersComponent,
-      },
-      { path: '', redirectTo: 'borrowers', pathMatch: 'full' },
-      { path: '', redirectTo: 'charts', pathMatch: 'full' },
-      {
         path: 'imports',
         component: ImportsComponent,
       },
       { path: '', redirectTo: 'imports', pathMatch: 'full' },
-      { path: '', redirectTo: 'charts', pathMatch: 'full' },
-      {
-        path: 'automations',
-        component: AutomationsComponent,
-      },
-      { path: '', redirectTo: 'automations', pathMatch: 'full' },
-      //**************************************************** */
     ],
   },
   { path: '**', redirectTo: '/home' },

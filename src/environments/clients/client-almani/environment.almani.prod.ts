@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:3000/standard/prod/api/v1',
-  apiDomain: 'http://localhost:3000',
+  apiURL: 'http://localhost:3009/standard/prod/api/v1',
+  apiDomain: 'http://localhost:3009',
   authRoute: '/standard/prod/api/v1/login',
   clientName: 'almani',
   clientLogo: 'assets/clients/client-almani/logo.png',

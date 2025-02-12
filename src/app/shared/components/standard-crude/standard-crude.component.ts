@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateModalCompanieComponent } from "../../../modals/create/create-modal-companie/create-modal-companie.component";
+//import { CreateModalCompanieComponent } from "../../../modals/create/create-modal-companie/create-modal-companie.component";
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { CRUDInterface } from '../../interfaces/CRUD.interface';
 import {ApiCompanieResponse,AutomarionData,ApiResponse,CompanieData  } from '../../interfaces/companie.interfaces';
@@ -17,7 +17,8 @@ import { CompanyService } from '../../../core/services/http/update-companie.serv
 @Component({
   selector: 'app-standard-crude',
   standalone: true,
-  imports: [CommonModule, CreateModalCompanieComponent, MatDialogModule, SharedModule],
+  //imports: [CommonModule, CreateModalCompanieComponent, MatDialogModule, SharedModule],
+  imports: [CommonModule, MatDialogModule, SharedModule],
   templateUrl: './standard-crude.component.html',
   styleUrls: ['./standard-crude.component.scss']
 })
@@ -187,7 +188,7 @@ export class StandardCrudeComponent implements OnChanges {
       );
   }
   private openDialog() {
-    const dialogRef: MatDialogRef<CreateModalCompanieComponent> = this.dialog.open(CreateModalCompanieComponent, {
+    /*const dialogRef: MatDialogRef<CreateModalCompanieComponent> = this.dialog.open(CreateModalCompanieComponent, {
       width: '80%',
       maxWidth: '2000px',
       height: '80%',
@@ -200,7 +201,7 @@ export class StandardCrudeComponent implements OnChanges {
       this.closeAndReturn();
       this.autData =[]
       this.companieData =[]
-    });
+    });*/
   }
   
   // Método para tratar erros
