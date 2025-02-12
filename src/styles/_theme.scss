@@ -1,0 +1,21 @@
+// _themes.scss
+
+$themes: ('tlp': (primary-color: #BF0B1A,
+    secondary-color: #F2B705,
+  ),
+  'vexia': (primary-color: #03A688,
+    secondary-color: #735851,
+  ),
+  'adeste': (primary-color: #F24452,
+    secondary-color: #03A6A6,
+    
+  ),
+  'default': (primary-color: #04b998,
+    secondary-color: #bcc1c5,
+    
+  ));
+  
+
+@function theme-color($theme, $color) {
+  @return map-get(map-get($themes, $theme), $color);
+}

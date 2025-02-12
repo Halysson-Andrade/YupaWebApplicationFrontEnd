@@ -1,0 +1,17 @@
+<div class="date-filter">
+  <mat-form-field>
+    <mat-label>Data Início</mat-label>
+    <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" placeholder="Escolha a data de início" readonly>
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data Fim</mat-label>
+    <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" placeholder="Escolha a data de fim" readonly>
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="applyFilter()">Gerar Gráficos</button>
+</div>

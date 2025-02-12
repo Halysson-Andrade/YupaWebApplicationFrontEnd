@@ -1,0 +1,8 @@
+<button [type]="type" [disabled]="disabled" [ngClass]="{
+  'btn-back': !disabled && class === 'btn-back',
+  'btn-back-disabled': disabled && class === 'btn-back',
+  'btn-submit': !disabled && class === 'btn-submit',
+  'btn-submit-disabled': disabled && class === 'btn-submit'
+}" class="btn">
+  <ng-content></ng-content>
+</button>

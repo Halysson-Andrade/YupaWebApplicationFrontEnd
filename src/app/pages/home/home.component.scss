@@ -1,0 +1,11 @@
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .red {
+        background-color: red;
+        height: 200px;
+        width: 200px;
+    }
+}

@@ -1,0 +1,14 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<section>
+  <!-- Componente de filtro de data -->
+   <h3>DashBoards performance TIM</h3>
+  <div class="filter-container">
+    <app-date-filter (filterApplied)="onFilterApplied($event)"></app-date-filter>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="charts-section">
+    <div echarts [options]="chartPie" class="charts-pie" (chartInit)="onChartInit($event)"></div>
+    <div echarts [options]="chartBar" class="charts-bar"></div>
+  </div>
+</section>

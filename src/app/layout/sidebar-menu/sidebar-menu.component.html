@@ -1,0 +1,33 @@
+<aside class="sidebar">
+  <div class="sidebar-container">
+    <div class="sidebar-header">
+      <img
+        [src]="environment.clientLogo"
+        alt="Logo do cliente"
+        class="logo-client"
+      />
+    </div>
+    <div class="sidebar-body">
+      <ul>
+        <li *ngFor="let menu of menus" class="parent-menu">
+          <h6 [routerLink]="menu.mnu_routerlink" class="teste">
+            <i [class]="menu.mnu_icon"></i> <span>{{ menu.mnu_label }}</span>
+          </h6>
+          <ul *ngIf="menu.children.length > 0">
+            <li *ngFor="let child of menu.children">
+              <a [routerLink]="child.mnu_routerlink">
+                <i [class]="child.mnu_icon"></i>
+                <span>{{ child.mnu_label }} </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <app-button type="button" (click)="logout()">
+      <span>Logout</span>
+    </app-button>
+  </div>
+</aside>

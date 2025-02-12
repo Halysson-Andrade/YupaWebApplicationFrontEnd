@@ -1,0 +1,56 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<div [ngClass]="config.theme ? 'theme-' + config.theme : 'default-theme'">
+  <!-- Cabeçalho com o título da página -->
+  <h1 class="page-title">{{ pageTitle }}</h1>
+  
+  <!-- Cabeçalho com ações -->
+  <div class="header-actions">
+    <button class="add-record" (click)="addRecord()" aria-label="Adicionar novo registro">
+      Adicionar Registro
+    </button>
+    <input 
+      type="text" 
+      placeholder="Buscar registro..." 
+      (input)="handleInput($event)"
+      class="search-input"
+      aria-label="Buscar registro"
+    >
+  </div>
+  
+  <!-- Tabela de dados -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" (click)="sortData(column)">
+            {{ column }}
+            <span *ngIf="sortColumn === column">
+              {{ sortDirection === 'asc' ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th class="action-column">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of paginatedData">
+          <td *ngFor="let column of columns">{{ row[column] }}</td>
+          <td class="action-buttons">
+            <button class="edit-button" (click)="editRecord(row)" aria-label="Editar registro">
+              <i class="ph-bold ph-pencil"></i>
+            </button>
+            <button class="delete-button" (click)="deleteRecord(row)" aria-label="Deletar registro">
+              <i class="ph-bold ph-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginação -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 0" aria-label="Página anterior">Anterior</button>
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1" aria-label="Próxima página">Próxima</button>
+  </div>
+</div>

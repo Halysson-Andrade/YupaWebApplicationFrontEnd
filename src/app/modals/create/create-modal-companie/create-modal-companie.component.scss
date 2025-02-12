@@ -1,0 +1,340 @@
+// Importar o arquivo de temas
+@import '../../../../styles/theme';
+
+// Definir o tema desejado
+$current-theme: 'default'; // Altere para o tema desejado
+
+// Obter as cores do tema
+$primary-color: theme-color($current-theme, 'primary-color');
+$secondary-color: theme-color($current-theme, 'secondary-color');
+
+// Estilização do container do modal
+.modal {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;       /* Remover qualquer limite de largura */
+  max-height: 100%;      /* Usar 100% da altura */
+  background: white;
+  border-radius: 8px;
+  padding: 20px;         /* Adiciona espaçamento dentro do modal */
+  box-sizing: border-box; /* Inclui o padding no cálculo da altura e largura */
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;      /* Garante que o conteúdo não ultrapasse os limites do modal */
+}
+
+// Cabeçalho do Modal
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+}
+
+.modal-title {
+  font-size: 24px; // Tamanho do título do modal
+  font-weight: bold;
+}
+
+// Botão de fechar
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px; // Tamanho do ícone de fechar
+  cursor: pointer;
+}
+
+.modal-tabs button {
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px; /* Tamanho da fonte das abas */
+  transition: background-color 0.3s, color 0.3s; /* Transição suave para cor de fundo e texto */
+}
+
+/* Estilo para o botão ativo */
+.modal-tabs button.active {
+  border-bottom: 2px solid $primary-color;
+  font-weight: bold;
+}
+
+/* Estilo para o botão ao passar o mouse */
+.modal-tabs button:hover {
+  background-color: $primary-color; /* Cor de fundo ao passar o mouse */
+  color: white; /* Cor do texto ao passar o mouse */
+}
+
+.modal-tabs button {
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px; // Tamanho da fonte das abas
+}
+
+.modal-tabs button.active {
+  border-bottom: 2px solid $primary-color;
+  font-weight: bold;
+}
+
+// Corpo do Modal com Grid Layout para garantir pelo menos 3 itens por linha
+.modal-body {
+  flex: 1; /* Faz com que o modal-body preencha o espaço restante */
+  overflow: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto, 1fr); /* Garante 3 colunas de igual largura */
+  grid-gap: 20px; /* Espaçamento entre os itens */
+  width: 100%; /* Garante que a largura ocupe 100% do container pai */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+  flex: 1; /* Faz com que o form-grid preencha o espaço disponível dentro do modal-body */
+}
+.form-grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Define a primeira coluna como menor que a segunda */
+  grid-gap: 20px; /* Espaçamento entre os itens */
+  width: 100%; /* Garante que a largura ocupe 100% do container pai */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+  flex: 1; /* Faz com que o form-grid preencha o espaço disponível dentro do modal-body */
+}
+.form-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr; /* Define a primeira coluna como menor que a segunda */
+  grid-gap: 20px; /* Espaçamento entre os itens */
+  width: 100%; /* Garante que a largura ocupe 100% do container pai */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+  flex: 1; /* Faz com que o form-grid preencha o espaço disponível dentro do modal-body */
+}
+.form-grid3 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 4fr 1fr; /* Define a primeira coluna como menor que a segunda */
+  grid-gap: 20px; /* Espaçamento entre os itens */
+  width: 100%; /* Garante que a largura ocupe 100% do container pai */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+  flex: 1; /* Faz com que o form-grid preencha o espaço disponível dentro do modal-body */
+}
+
+.form-group {
+  box-sizing: border-box; /* Inclui padding e border na largura total dos itens */
+}
+
+
+// Estilização das caixas de texto e selects
+input[type="text"],
+input[type="number"],
+select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%; // Ocupa 100% da largura da coluna
+  box-sizing: border-box;
+  font-size: 16px; // Tamanho da fonte das caixas de texto
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: $primary-color;
+  outline: none;
+}
+
+// Garantir que os labels fiquem na mesma linha que o input
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+// Rodapé do Modal
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px;
+  border-top: 1px solid #ccc;
+}
+
+.modal-footer .btn-cancel,
+.modal-footer .btn-save {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px; // Tamanho da fonte dos botões
+}
+
+.modal-footer .btn-cancel {
+  background: #f0f0f0;
+}
+
+.modal-footer .btn-save {
+  background: $primary-color;
+  color: white;
+}
+
+// Estilização do container de cabeçalho
+.page-title {
+  color: #817d7d;
+  font-size: 18px; // Tamanho da fonte do título da página
+}
+
+// Estilização das ações do cabeçalho
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header-actions .add-record {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; // Tamanho da fonte do botão
+  transition: background-color 0.3s;
+}
+
+.header-actions .add-record:hover {
+  background-color: $secondary-color;
+}
+
+.header-actions .search-input {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 16px; // Tamanho da fonte do input de pesquisa
+}
+
+// Estilização da tabela
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: $primary-color;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px; // Tamanho da fonte dos cabeçalhos da tabela
+  transition: background-color 0.3s;
+}
+
+table th:hover {
+  background-color: darken($primary-color, 10%);
+}
+
+table td {
+  padding: 12px;
+  border: none;
+  font-size: 16px; // Tamanho da fonte das células da tabela
+}
+
+table tr {
+  transition: background-color 0.3s;
+}
+
+table tr:hover {
+  background-color: $secondary-color;
+  color: white;
+}
+
+table .action-column {
+  text-align: right;
+}
+
+table .action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+table .action-buttons button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+table .action-buttons i {
+  font-size: 24px;
+}
+
+table .action-buttons .edit-button {
+  color: #4CAF50;
+}
+
+table .action-buttons .delete-button {
+  color: #F44336;
+}
+
+table .action-buttons button:hover i {
+  opacity: 0.8;
+}
+
+// Estilização da paginação
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; // Tamanho da fonte dos botões de paginação
+  transition: background-color 0.3s;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover {
+  background-color: darken($primary-color, 10%);
+}
+.error {
+  color: #d9534f; /* Cor vermelha para erro */
+  font-size: 0.875rem; /* Tamanho da fonte menor */
+  margin-top: 0.25rem; /* Espaçamento acima da mensagem de erro */
+  display: block; /* Certifique-se de que a mensagem de erro ocupe sua própria linha */
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+  /* Remove padding extra */
+  height: 100%;
+  /* Garante que o diálogo tenha 100% da altura */
+  background-color: rgb(20, 20, 20);
+  /* Altere para a cor desejada */
+  box-sizing: border-box;
+  border-radius: 8px;
+  /* Opcional: bordas arredondadas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,26 @@
+<div class="input-group" [ngClass]="{ 'input-row': isRow }">
+  <label *ngIf="label" [for]="id" class="input-label">{{ label }}</label>
+
+  <div *ngIf="type === 'checkbox'" class="custom-checkbox">
+    <input
+      type="checkbox"
+      [id]="id"
+      [formControl]="control"
+      class="checkbox-input"
+      (change)="toggleCheckbox()"
+      [checked]="checked"
+    />
+    <ng-icon *ngIf="checked" name="ionCheckmarkSharp" size="16" color="#FFF"></ng-icon>
+  </div>
+
+  <input
+    *ngIf="type !== 'checkbox'"
+    [type]="type"
+    [placeholder]="placeholder"
+    [id]="id"
+    [required]="required"
+    [formControl]="control"
+    class="input-control"
+    [ngClass]="{ 'is-invalid': isInvalid }"
+  />
+</div>

@@ -1,0 +1,61 @@
+.date-filter {
+  display: flex;
+  flex-direction: row; /* Alinha os itens em uma linha */
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+  gap: 16px; /* Espaçamento entre os campos de data e o botão */
+
+  mat-form-field {
+    flex: 1; /* Permite que os campos de data se expandam igualmente */
+    max-width: 250px; /* Define a largura máxima dos campos de data */
+
+    .mat-form-field-flex {
+      background-color: #fff; /* Cor de fundo branca para o input */
+      color: #000; /* Cor do texto dentro do input */
+
+      input {
+        background-color: #fff; /* Cor de fundo branca para o input */
+        color: #000; /* Cor do texto dentro do input */
+        border: 1px solid #ccc; /* Borda do input, se necessário */
+        cursor: pointer; /* Cursor de ponteiro para indicar que o campo não é editável */
+      }
+    }
+
+    /* Se você estiver usando o estilo de sublinhado */
+    .mat-form-field-underline {
+      background-color: #000; /* Cor da linha de sublinhado (underline) */
+    }
+
+    /* Se você estiver usando o estilo de contorno */
+    .mat-form-field-outline {
+      .mat-form-field-outline-start,
+      .mat-form-field-outline-end {
+        color: #000; /* Cor das bordas de contorno (outline) */
+      }
+    }
+
+    /* Se você quiser customizar o ripple effect */
+    .mat-form-field-ripple {
+      background-color: #000; /* Cor do efeito ripple */
+    }
+
+    /* Ajuste a cor do label */
+    .mat-form-field-label {
+      color: #000; /* Cor do texto do label */
+    }
+  }
+
+  button {
+    background-color: #fff; /* Cor de fundo branca para o botão */
+    color: #000; /* Cor do texto do botão */
+    border: 1px solid #000; /* Borda do botão */
+    height: 56px; /* Define a altura do botão para corresponder à altura dos campos de data */
+    padding: 0 16px; /* Adiciona um espaçamento interno horizontal ao botão */
+    display: flex; /* Alinha o conteúdo do botão no centro */
+    align-items: center; /* Centraliza verticalmente o texto no botão */
+    justify-content: center; /* Centraliza horizontalmente o texto no botão */
+
+    &:hover {
+      background-color: #f5f5f5; /* Cor de fundo do botão ao passar o mouse */
+    }
+  }
+}

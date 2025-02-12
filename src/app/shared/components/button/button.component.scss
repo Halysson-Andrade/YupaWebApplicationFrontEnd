@@ -1,0 +1,56 @@
+.btn {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 2rem;
+
+    &-back {
+        border: var(--primaryColor) solid 1px;
+
+        ::ng-deep span {
+            color: var(--primaryColor);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
+
+    &-back-disabled {
+        border-color: #eeeeee;
+        cursor: not-allowed;
+        opacity: 0.5;
+
+        ::ng-deep span {
+            color: #999;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
+
+    &-submit {
+        background-color: var(--primaryColor);
+        opacity: 0.9;
+        width: 100%;
+        border: solid 1px transparent;
+
+        ::ng-deep span {
+            color: #FFF;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
+
+    &-submit-disabled {
+        background-color: #eeeeee;
+        cursor: not-allowed;
+        border: solid 1px transparent;
+
+        ::ng-deep span {
+            color: #999;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
+}

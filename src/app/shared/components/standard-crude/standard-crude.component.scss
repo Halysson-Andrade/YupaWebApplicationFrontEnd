@@ -1,0 +1,276 @@
+// Importar o arquivo de temas
+@import '../../../../styles/theme';
+
+// Definir o tema desejado
+$current-theme: 'default'; // Altere para o tema desejado
+
+// Obter as cores do tema
+$primary-color: theme-color($current-theme, 'primary-color');
+$secondary-color: theme-color($current-theme, 'secondary-color');
+
+// Estilização do container do modal
+.modal {
+  width: 80%;
+  max-width: 2000px;
+  height: 80%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+// Cabeçalho do Modal
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+// Botão de fechar
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+// Abas do Modal
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+
+  button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+
+    &.active {
+      border-bottom: 2px solid $primary-color;
+    }
+  }
+}
+
+// Corpo do Modal
+.modal-body {
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+// Rodapé do Modal
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+
+  .btn-cancel,
+  .btn-save {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .btn-cancel {
+    background: #f0f0f0;
+  }
+
+  .btn-save {
+    background: $primary-color;
+    color: white;
+  }
+}
+
+// Estilização das caixas de texto dentro do modal
+input[type="text"],
+input[type="number"],
+select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px; // Espaçamento entre as caixas de texto
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}
+
+// Estilização do container de cabeçalho
+.page-title {
+  color: #817d7d;
+  font-size: 16px;
+}
+
+// Estilização das ações do cabeçalho
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .add-record {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+
+  .search-input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    width: 200px;
+  }
+}
+
+// Estilização da tabela
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: $primary-color;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  td {
+    padding: 10px;
+    border: none;
+  }
+
+  tr {
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: white;
+    }
+  }
+
+  .action-column {
+    text-align: right;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+
+      i {
+        font-size: 24px;
+      }
+
+      &.edit-button {
+        color: #4CAF50;
+      }
+
+      &.delete-button {
+        color: #F44336;
+      }
+
+      &:hover i {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+// Estilização da paginação
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  .custom-dialog-container .mat-dialog-container {
+    padding: 0;
+    /* Remove padding extra */
+    height: 100%;
+    /* Garante que o diálogo tenha 100% da altura */
+    background-color: white;
+    /* Altere para a cor desejada */
+    box-sizing: border-box;
+    border-radius: 8px;
+    /* Opcional: bordas arredondadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: white;
+    /* Altere para a cor desejada */
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+

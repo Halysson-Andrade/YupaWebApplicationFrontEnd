@@ -1,0 +1,121 @@
+/* Reset básico */
+html,
+body,
+div,
+span,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+img,
+small,
+i,
+center,
+ul,
+li,
+form,
+label,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Define blocos de layout */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+/* Define as margens padrão do corpo */
+body {
+    line-height: 1;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fafafa;
+}
+
+/* Remove as listas com marcadores e espaçamento */
+ol,
+ul {
+    list-style: none;
+}
+
+/* Remove aspas de blockquote */
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+/* Tabelas sem espaçamento e bordas */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Remove decorações padrão de links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove aparência padrão de botões e inputs */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Adiciona um box-sizing consistente */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

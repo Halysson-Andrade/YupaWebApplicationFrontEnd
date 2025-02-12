@@ -1,0 +1,25 @@
+.layout {
+  display: flex;
+  height: 100vh;
+
+  app-sidebar-menu {
+    width: 240px;
+    flex-shrink: 0;
+  }
+
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    app-top-menu {
+      background-color: #FFF;
+      height: 60px;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+  }
+}
