@@ -1,0 +1,30 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="user-page">
+  <div class="page-header">
+    <app-button type="button" class="btn-new">
+      <i class="ph-bold ph-plus"></i>
+      <span>Criar Nova</span>
+    </app-button>
+  </div>
+  <div class="page-body">
+    <app-table
+      [data]="usersData"
+      [columns]="tableColumns"
+      [itemsPerPage]="itemsPerPage"
+      [currentPage]="currentPage"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+      >></app-table
+    >
+  </div>
+  <div class="page-footer">
+    <pagination-controls
+      class="custom-pagination"
+      [previousLabel]="'Anterior'"
+      [nextLabel]="'Próximo'"
+      [autoHide]="true"
+      (pageChange)="currentPage = $event"
+    ></pagination-controls>
+  </div>
+</div>

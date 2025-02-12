@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column.header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let row of data
+            | paginate
+              : { itemsPerPage: itemsPerPage, currentPage: currentPage };
+          let i = index
+        "
+      >
+        <td *ngFor="let column of columns">
+          <ng-container *ngIf="column.field === 'actions'; else dataColumn">
+          </ng-container>
+          <ng-template #dataColumn>
+            <ng-container *ngIf="isHTML(column.formatter ? column.formatter(row) : row[column.field]); else plainText">
+              <span [innerHTML]="column.formatter ? column.formatter(row) : row[column.field]"></span>
+            </ng-container>
+            <ng-template #plainText>
+              {{ column.formatter ? column.formatter(row) : row[column.field] }}
+            </ng-template>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

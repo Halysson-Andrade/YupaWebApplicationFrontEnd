@@ -50,9 +50,7 @@ export class ChangePasswordComponent {
             this.isLoading = false;
             sessionStorage.removeItem('old_password');
             this.toastr.success('Senha alterada com sucesso!');
-            const newToken = response.data.token;
-            sessionStorage.setItem('auth_token', newToken);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/permissions']);
           },
           error: (err: any) => {
             this.isLoading = false;
@@ -88,12 +86,15 @@ export class ChangePasswordComponent {
   }
 
   private extractErrorMessage(err: any): string {
+    console.log(err.error.error)
     if (err?.error?.errors?.length) {
       return err.error.errors[0];
     } else if (err?.error?.message) {
       return err.error.message;
-    } else {
-      return 'Erro desconhecido. Por favor, tente novamente mais tarde.';
+    } else if (err.error.error) {
+      return err.error.error;
+    } {
+      return 'Erro desconhecido, por gentileza entrar em contato com o suporte!'
     }
   }
 }

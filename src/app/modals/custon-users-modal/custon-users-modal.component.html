@@ -1,0 +1,160 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h1 class="modal-title">Cadastro de usuários</h1>
+      <button type="button" class="close-btn" (click)="close()">✖</button>
+    </div>
+
+    <!-- Abas do Modal -->
+    <div class="modal-tabs">
+      <button (click)="switchTab(0)" [class.active]="activeTab === 0">Dados usuário</button>
+      <button (click)="switchTab(1)" [class.active]="activeTab === 1">Permissionamento</button>
+      <button (click)="switchTab(2)" [class.active]="activeTab === 2">Permissões WhatsApp</button>
+    </div>
+
+    <!-- Corpo do Modal -->
+    <div class="modal-body">
+      <ng-container [ngSwitch]="activeTab">
+        <!-- Conteúdo da Aba 1 -->
+        <div *ngSwitchCase="0" class="scrollable-content">
+          <div class="form-grid3">
+            <div class="form-group">
+              <label for="usr_email"><strong>E-mail do usuário</strong></label>
+              <input type="text" id="usr_email" formControlName="usr_email" placeholder="Digite o e-mail do usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_email')?.invalid && form.get('usr_email')?.touched" class="error">
+                E-mail do usuário é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="usr_name"><strong>Nome do usuário</strong></label>
+              <input type="text" id="usr_name" formControlName="usr_name" placeholder="Digite o nome do usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_name')?.invalid && form.get('usr_name')?.touched" class="error">
+                Nome do usuário é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="usr_profile"><strong>Perfil</strong></label>
+              <select id="usr_profile" formControlName="usr_profile" [attr.disabled]="!isEditing ? true : null">
+                <option value="" disabled selected>Perfis</option>
+                <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.nome }}</option>
+              </select>
+              <div *ngIf="form.get('usr_profile')?.invalid && form.get('usr_profile')?.touched" class="error">
+                A seleção de um perfil é obrigatório
+              </div>
+            </div>
+            <div class="form-grid1">
+              <div class="form-group">
+                <label for="usr_status"><strong>Status</strong></label>
+                <select id="usr_status" formControlName="usr_status" [disabled]="!isEditing">
+                  <option [ngValue]="true">Ativo</option>
+                  <option [ngValue]="false">Inativo</option>
+                </select>
+                <div *ngIf="form.get('usr_status')?.invalid && form.get('usr_status')?.touched" class="error">
+                  Status do sistema é obrigatório.
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <p style="margin-top: 20px;"> </p>
+          <strong>Usuário dos sistemas</strong>
+          <p style="margin-top: 10px;"> </p>
+          <div class="form-grid3">
+            <div class="form-group">
+              <label for="usr_ad">AD</label>
+              <input type="text" id="usr_ad" formControlName="usr_ad" placeholder="Digite o usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_ad')?.invalid && form.get('usr_ad')?.touched" class="error">
+                Usuário obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="usr_protheus">Protheus</label>
+              <input type="text" id="usr_protheus" formControlName="usr_protheus" placeholder="Digite o usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_protheus')?.invalid && form.get('usr_protheus')?.touched" class="error">
+                Usuário obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="usr_sucessFactory">Sucess Factory</label>
+              <input type="text" id="usr_sucessFactory" formControlName="usr_sucessFactory"
+                placeholder="Digite o usuário" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_sucessFactory')?.invalid && form.get('usr_sucessFactory')?.touched"
+                class="error">
+                Usuário obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="usr_sap">Sap</label>
+              <input type="text" id="usr_sap" formControlName="usr_sap" placeholder="Digite o usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_sap')?.invalid && form.get('usr_sap')?.touched" class="error">
+                Usuário obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="usr_vpn">VPN</label>
+              <input type="text" id="usr_vpn" formControlName="usr_vpn" placeholder="Digite o usuário"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('usr_vpn')?.invalid && form.get('usr_vpn')?.touched" class="error">
+                Usuário obrigatório
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <!-- Conteúdo da Aba 2 -->
+        <div *ngSwitchCase="1" class="scrollable-content">
+          <p><strong>Selecione as permissões do usuário</strong></p>
+          <label>
+            <input type="checkbox" (change)="toggleAllPermissions($event)" [checked]="allPermissionsSelected" />
+            Selecionar Todos
+          </label>
+          <form [formGroup]="permissionsForm">
+            <div *ngFor="let permission of permissionsControls; let i = index">
+              <label>
+                <input type="checkbox" [formControl]="permission" [attr.disabled]="!isEditing ? true : null">
+                {{ dialogData.registerDataSecoundSheet[i]['Ação'] }}
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <!-- Conteúdo da Aba 3 -->
+        <div *ngSwitchCase="2" class="scrollable-content">
+          <p><strong>Selecione os sistemas do usuário</strong></p>
+          <label>
+            <input type="checkbox" (change)="toggleAllSystems($event)" [checked]="allSystemsSelected" />
+            Selecionar Todos
+          </label>
+          <form [formGroup]="systemsForm">
+            <div *ngFor="let system of systemsControls; let i = index">
+              <label>
+                <input type="checkbox" [formControl]="system" [attr.disabled]="!isEditing ? true : null">
+                {{ dialogData.registerDatathirdSheet[i]['Nome'] }}
+              </label>
+            </div>
+          </form>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Rodapé do Modal -->
+    <div class="modal-footer">
+      <button type="button" (click)="close()" class="btn-cancel">Cancelar</button>
+      <button type="submit" id="saveButton" (click)="onSaveClick($event)" class="btn-save">Salvar</button>
+    </div>
+  </div>
+</form>

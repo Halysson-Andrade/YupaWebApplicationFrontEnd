@@ -15,7 +15,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordModule } from './pages/forgot-password/forgot-password.module';
 import { HomeModule } from './pages/home/home.module';
 import { LayoutModule } from './layout/layout.module';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { PermissionModule } from './pages/permission/permission.module';
+import { MenuModule } from './pages/menu/menu.module';
+import { UserModule } from './pages/user/user.module';
+import { ProfileModule } from './pages/profile/profile.module';
 
 export function tokenGetter() {
   return sessionStorage.getItem('auth_token');
@@ -29,6 +32,10 @@ export function tokenGetter() {
     AppRoutingModule,
     LoginModule,
     HomeModule,
+    MenuModule,
+    UserModule,
+    ProfileModule,
+    PermissionModule,
     ChangePasswordModule,
     ForgotPasswordModule,
     LayoutModule,
@@ -46,7 +53,7 @@ export function tokenGetter() {
       preventDuplicates: true,
     }),
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

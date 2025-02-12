@@ -1,0 +1,180 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h1 class="modal-title">Cadastre uma empresa</h1>
+    </div>
+
+    <!-- Abas do Modal -->
+    <div class="modal-tabs">
+      <button (click)="switchTab(0)" [class.active]="activeTab === 0">Informações</button>
+      <button (click)="switchTab(1)" [class.active]="activeTab === 1">Automações</button>
+    </div>
+
+    <!-- Corpo do Modal -->
+    <div class="modal-body">
+      <ng-container [ngSwitch]="activeTab">
+        <!-- Conteúdo da Aba 1 -->
+        <div *ngSwitchCase="0" class="form-grid">
+          <!-- Grupo de Inputs 1 -->
+          <div class="form-grid2">
+            <div class="form-group">
+              <label for="cmp_system_code"><strong>Código do Sistema:</strong></label>
+              <input type="text" id="cmp_system_code" formControlName="cmp_system_code"
+                placeholder="Digite o código do sistema" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_system_code')?.invalid && form.get('cmp_system_code')?.touched" class="error">
+                Código do sistema é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cmp_name"><strong>Nome da Empresa:</strong></label>
+              <input type="text" id="cmp_name" formControlName="cmp_name" placeholder="Digite o nome da empresa"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_name')?.invalid && form.get('cmp_name')?.touched" class="error">
+                Nome da empresa é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cmp_cnpj"><strong>CNPJ:</strong></label>
+              <input type="text" id="cmp_cnpj" formControlName="cmp_cnpj" placeholder="Digite o CNPJ"
+                (input)="formatCNPJ($event)" maxlength="18" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_cnpj')?.errors?.['invalidCNPJ'] && form.get('cmp_cnpj')?.touched" class="error">
+                CNPJ é obrigatório e deve estar no formato correto (XX.XXX.XXX/XXXX-XX).
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cmp_cei"><strong>CEI:</strong></label>
+              <input type="text" id="cmp_cei" formControlName="cmp_cei" placeholder="Digite o CEI"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_cei')?.invalid && form.get('cmp_cei')?.touched" class="error">
+                CEI é obrigatório.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid3">
+            <div class="form-group">
+              <label for="cmp_zip_code"><strong>CEP:</strong></label>
+              <input type="text" id="cmp_zip_code" formControlName="cmp_zip_code" placeholder="Digite o CEP"
+                (blur)="onCepBlur($event)" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_zip_code')?.invalid && form.get('cmp_zip_code')?.touched" class="error">
+                CEP é obrigatório.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmp_uf"><strong>UF:</strong></label>
+              <select id="cmp_uf" formControlName="cmp_uf">
+                <option value="">Selecione...</option>
+                <option value="SP">SP</option>
+                <option value="RJ">RJ</option>
+                <!-- Adicione mais opções conforme necessário -->
+              </select>
+              <div *ngIf="form.get('cmp_uf')?.invalid && form.get('cmp_uf')?.touched" class="error">
+                UF é obrigatório.
+              </div>
+            </div>
+
+            <!-- Grupo de Inputs 3 -->
+            <div class="form-group">
+              <label for="cmp_address"><strong>Endereço:</strong></label>
+              <input type="text" id="cmp_address" formControlName="cmp_address" placeholder="Digite o endereço"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_address')?.invalid && form.get('cmp_address')?.touched" class="error">
+                Endereço é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cmp_number"><strong>Número:</strong></label>
+              <input type="text" id="cmp_number" formControlName="cmp_number" placeholder="Digite o número"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_number')?.invalid && form.get('cmp_number')?.touched" class="error">
+                Número é obrigatório.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid1">
+            <div class="form-group">
+              <label for="cmp_neighborhood"><strong>Bairro:</strong></label>
+              <input type="text" id="cmp_neighborhood" formControlName="cmp_neighborhood" placeholder="Digite o bairro"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_neighborhood')?.invalid && form.get('cmp_neighborhood')?.touched" class="error">
+                Bairro é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cmp_city"><strong>Cidade:</strong></label>
+              <input type="text" id="cmp_city" formControlName="cmp_city" placeholder="Digite a cidade"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_city')?.invalid && form.get('cmp_city')?.touched" class="error">
+                Cidade é obrigatória.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid1">
+            <div class="form-group">
+              <label for="cmp_ecac_subject"><strong>Ecac Subject:</strong></label>
+              <input type="text" id="cmp_ecac_subject" formControlName="cmp_ecac_subject"
+                placeholder="Informar Ecac Subject" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_ecac_subject')?.invalid && form.get('cmp_ecac_subject')?.touched" class="error">
+                Ecac Subject é obrigatório.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmp_ecac_issuer"><strong>ECAC issuer:</strong></label>
+              <input type="text" id="cmp_ecac_issuer" formControlName="cmp_ecac_issuer"
+                placeholder="Informar ECAC issuer" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_ecac_issuer')?.invalid && form.get('cmp_ecac_issuer')?.touched" class="error">
+                ECAC issuer é obrigatório.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid1">
+            <div class="form-group">
+              <label for="cmp_ecac_serial"><strong>ECAC Serial:</strong></label>
+              <input type="text" id="cmp_ecac_serial" formControlName="cmp_ecac_serial"
+                placeholder="Informar o serial do ECAC" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_ecac_serial')?.invalid && form.get('cmp_ecac_serial')?.touched" class="error">
+                ECAC Serial é obrigatório.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmp_docs_path"><strong>Caminho para salvar documentação:</strong></label>
+              <input type="text" id="cmp_docs_path" formControlName="cmp_docs_path"
+                placeholder="Informar estrutura de pasta" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('cmp_docs_path')?.invalid && form.get('cmp_docs_path')?.touched" class="error">
+                Caminho para salvar documentação é obrigatório.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Conteúdo da Aba 2 -->
+        <div *ngSwitchCase="1">
+          <p><Strong>Selecione as automações</Strong></p>
+          <form [formGroup]="automationsForm">
+            <div *ngFor="let automation of automationsControls; let i = index">
+              <label>
+                <input type="checkbox" [formControl]="automation" [attr.disabled]="!isEditing ? true : null" >
+                {{ dialogData.automations[i]['Nome automacao'] }}
+              </label>
+            </div>
+          </form>
+    </div>
+    </ng-container>
+  </div>
+
+  <!-- Rodapé do Modal -->
+  <div class="modal-footer">
+    <button type="button" (click)="close()" class="btn-cancel">Cancelar</button>
+    <button type="submit" id="saveButton" (click)="onSaveClick($event)" class="btn-save">Salvar</button>
+  </div>
+  </div>
+</form>

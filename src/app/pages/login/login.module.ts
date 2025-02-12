@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginComponent],
-  imports: [CommonModule, ReactiveFormsModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule],
   exports: [LoginComponent],
 })
 export class LoginModule {}

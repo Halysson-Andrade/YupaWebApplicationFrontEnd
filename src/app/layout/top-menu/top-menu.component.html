@@ -1,21 +1,38 @@
-<nav class="top-menu">
-  <div class="logo">
-    <img/>
+<header class="container-header">
+  <!-- Botão para mostrar/esconder o sidebar -->
+  <div class="sidebar-toggle">
+    <button (click)="emitToggleSidebar()">
+      <i class="{{ isSidebarVisible ? 'ph-bold ph-arrow-circle-left' : 'ph-bold ph-arrow-circle-right' }}"></i>
+    </button>
   </div>
-  <div class="menu-items">
-    <a href="#">Home</a>
-    <a href="#">Serviços</a>
-    <a href="#">Contato</a>
-    <div class="profile-dropdown">
-      <button class="profile-btn">
-        Meu Perfil
-        <span class="arrow">&#9662;</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">Seu Cadastro</a>
-        <a href="#">Configurações</a>
-        <a href="#">Sair</a>
-      </div>
+
+  <!-- Título do menu -->
+  <div class="header-title">
+    <h1>{{ menuLabel }}</h1>
+  </div>
+
+  <!-- Informações do usuário -->
+  <div class="header-user-info" (click)="toggleDropdown()">
+    <div class="user-info-text">
+      <p>{{ userName }} <span class="dropdown-arrow">▼</span></p>
+      <span class="dropdown-arrow">{{ userEmail }}</span>
+    </div>
+
+    <!-- Menu suspenso -->
+    <div *ngIf="dropdownOpen" class="dropdown-menu" (mouseleave)="closeDropdown()">
+      <ul>
+        <li>
+          <a href="https://dash.callbell.eu/users/sign_in" target="_blank" rel="noopener noreferrer">
+            Caixa de entrada
+          </a>
+        </li>
+        <li>Configurações</li>
+        <li>Tema do sistema</li>
+        <li (click)="logout()" class="logout-item">
+          <i class="ph-bold ph-sign-out"></i>
+          <span>Logout</span>
+        </li>
+      </ul>
     </div>
   </div>
-</nav>
+</header>

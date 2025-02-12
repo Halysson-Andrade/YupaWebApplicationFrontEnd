@@ -2,21 +2,24 @@
 <div [ngClass]="config.theme ? 'theme-' + config.theme : 'default-theme'">
   <!-- Cabeçalho com o título da página -->
   <h1 class="page-title">{{ pageTitle }}</h1>
-  
+
   <!-- Cabeçalho com ações -->
   <div class="header-actions">
-    <button class="add-record" (click)="addRecord()" aria-label="Adicionar novo registro">
-      Adicionar Registro
-    </button>
-    <input 
-      type="text" 
-      placeholder="Buscar registro..." 
-      (input)="handleInput($event)"
-      class="search-input"
-      aria-label="Buscar registro"
-    >
+    <div class="buttons-area">
+      <app-button type="button" class="btn-new" (click)="addRecord()">
+        <i class="ph-bold ph-plus"></i>
+        <span>Adicionar</span>
+      </app-button>
+
+      <app-button *ngIf="config.modal === 'Custom-Users'" type="button" class="btn-new2" (click)="upload()">
+        <i class="ph-bold ph-upload-simple"></i>
+        <span>Upload</span>
+      </app-button>
+    </div>
+    <input type="text" placeholder="Buscar registro..." (input)="handleInput($event)" class="search-input"
+      aria-label="Buscar registro">
   </div>
-  
+
   <!-- Tabela de dados -->
   <div class="table-container">
     <table>
@@ -33,13 +36,32 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of paginatedData">
-          <td *ngFor="let column of columns">{{ row[column] }}</td>
+          <!-- Aplica a condição somente se config.modal for 'imports' e apenas na primeira coluna -->
+          <td *ngFor="let column of columns; let i = index">
+            <span
+              *ngIf="(config.modal === 'Custom-Users' && i === 0) || (config.modal === 'system-modal' && i === 0); else normalContent"
+              [ngClass]="{
+                    'status-active': row[column] === true, 
+                    'status-inactive': row[column] === false
+                  }">
+              {{ row[column] === false ? 'Inativo' : (row[column] === true ? 'Ativo' :
+              row[column]) }}
+            </span>
+            <!-- Exibe o valor normal para colunas que não são a primeira ou se config.modal for diferente de 'companies' -->
+            <ng-template #normalContent>{{ row[column] }}</ng-template>
+          </td>
+
+          <!-- Botões de ação -->
           <td class="action-buttons">
             <button class="edit-button" (click)="editRecord(row)" aria-label="Editar registro">
               <i class="ph-bold ph-pencil"></i>
             </button>
-            <button class="delete-button" (click)="deleteRecord(row)" aria-label="Deletar registro">
+            <button mat-icon-button class="delete-button" (click)="deleteRecord(row)" aria-label="Deletar registro">
               <i class="ph-bold ph-trash"></i>
+            </button>
+            <button *ngIf="config.modal === 'imports'" class="aprove-button" (click)="aproveRecord(row)"
+              aria-label="Aprovar registro">
+              <i class="ph-bold ph-check-fat"></i>
             </button>
           </td>
         </tr>

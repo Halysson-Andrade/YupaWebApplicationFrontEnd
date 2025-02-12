@@ -1,0 +1,23 @@
+<div class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ modalTitle }}</h2>
+      <button (click)="onClose()" class="close-btn">
+        <i class="ph-bold ph-x"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="modal-footer">
+      <button class="close" (click)="onClose()">
+        <span>Fechar</span>
+      </button>
+      <button (click)="onConfirm()" class="confirm-btn">
+        <span>{{ modalType === "new" ? "Confirmar" : "Salvar" }} </span>
+      </button>
+    </div>
+  </div>
+</div>

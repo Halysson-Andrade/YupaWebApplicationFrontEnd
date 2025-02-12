@@ -1,0 +1,107 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h1 class="modal-title">Cadastro de Sistema</h1>
+    </div>
+
+    <!-- Abas do Modal -->
+    <div class="modal-tabs">
+      <button (click)="switchTab(0)" [class.active]="activeTab === 0">Dados do sistema</button>
+    </div>
+
+    <!-- Corpo do Modal -->
+    <div class="modal-body">
+      <ng-container [ngSwitch]="activeTab">
+        <!-- Conteúdo da Aba 1 -->
+        <div *ngSwitchCase="0" class="form-grid">
+          <!-- Grupo de Inputs 1 -->
+          <div class="form-grid2">
+            <div class="form-group">
+              <label for="sys_name"><strong>Nome do sistema:</strong></label>
+              <input type="text" id="sys_name" formControlName="sys_name" placeholder="Digite o nome do sistema"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_name')?.invalid && form.get('sys_name')?.touched" class="error">
+                Nome do sistema é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sys_description"><strong>Descrição do sistema </strong></label>
+              <input type="text" id="sys_description" formControlName="sys_description"
+                placeholder="Descrição do sistema" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_description')?.invalid && form.get('sys_description')?.touched" class="error">
+                Descrição do sistema é obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="form-grid3">
+            <div class="form-group">
+              <label for="sys_status"><strong>Status</strong></label>
+              <select id="sys_status" formControlName="sys_status" [disabled]="!isEditing">
+                <option [ngValue]="true">Ativo</option>
+                <option [ngValue]="false">Inativo</option>
+              </select>
+              <div *ngIf="form.get('sys_status')?.invalid && form.get('sys_status')?.touched" class="error">
+                Status do sistema é obrigatório
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sys_credential"><strong>Credencial do sistema </strong></label>
+              <input type="text" id="sys_credential" formControlName="sys_credential" placeholder="Descrição do sistema"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_credential')?.invalid && form.get('sys_credential')?.touched" class="error">
+                Credencial do sistema é obrigatório
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sys_secret"><strong>Segredo / conexão </strong></label>
+              <input type="text" id="sys_secret" formControlName="sys_secret" placeholder="Descrição do sistema"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_secret')?.invalid && form.get('sys_secret')?.touched" class="error">
+                Credencial do sistema é obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="form-grid2">
+            <div class="form-group">
+              <label for="sys_url"><strong>URL </strong></label>
+              <input type="text" id="sys_url" formControlName="sys_url" placeholder="Informe a URL do sistema"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_url')?.invalid && form.get('sys_url')?.touched" class="error">
+                URL do sistema é obrigatório
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sys_security"><strong>Chave de segurança do sistema </strong></label>
+              <input type="text" id="sys_security" formControlName="sys_security"
+                placeholder="informe Chave de segurança do sistema" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_security')?.invalid && form.get('sys_security')?.touched" class="error">
+                Chave de segurança do sistema é obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="form-grid2">
+            <div class="form-group">
+              <label for="sys_path"><strong>Pasta </strong></label>
+              <input type="text" id="sys_path" formControlName="sys_path" placeholder="informe a pasta do sistema"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('sys_path')?.invalid && form.get('sys_path')?.touched" class="error">
+                Pasta do sistema é obrigatório
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo da Aba 2 -->
+
+      </ng-container>
+    </div>
+
+    <!-- Rodapé do Modal -->
+    <div class="modal-footer">
+      <button type="button" (click)="close()" class="btn-cancel">Cancelar</button>
+      <button type="submit" id="saveButton" (click)="onSaveClick($event)" class="btn-save">Salvar</button>
+    </div>
+  </div>
+</form>

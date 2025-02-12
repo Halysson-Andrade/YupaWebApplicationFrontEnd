@@ -1,0 +1,23 @@
+<div class="select-group" [ngClass]="{ 'select-row': isRow }">
+  <label *ngIf="label" [for]="id" class="select-label">{{ label }}</label>
+
+  <div class="custom-dropdown-wrapper" (click)="toggleDropdown()">
+    <div class="dropdown-control" [ngClass]="{ open: isOpen }">
+      <span *ngIf="!selectedValue">{{ placeholder }}</span>
+      <span *ngIf="selectedValue">{{ getSelectedOptionName() }}</span>
+      <i class="ph-bold ph-caret-down dropdown-icon"></i>
+    </div>
+
+    <ul class="dropdown-options" *ngIf="isOpen">
+      <li
+        *ngFor="let option of options"
+        (click)="selectOption(option)"
+        [class.selected]="option.value === selectedValue"
+      >
+        {{ option.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="isInvalid" class="error-message">Seleção inválida</div>
+</div>

@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('old_password', password);
             this.router.navigate(['/troca-de-senha']);
           } else {
+            //Aqui onde navega a página antes do login
             this.router.navigate(['/home']);
           }
         },

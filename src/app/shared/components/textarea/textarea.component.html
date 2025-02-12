@@ -1,0 +1,16 @@
+<div class="textarea-group" [ngClass]="{ 'textarea-row': isRow }">
+  <label *ngIf="label" [for]="id" class="textarea-label">{{ label }}</label>
+
+  <textarea
+    [id]="id"
+    [rows]="rows"
+    [formControl]="control"
+    [attr.maxlength]="maxlength"
+    [placeholder]="placeholder"
+    class="textarea-control"
+    [ngClass]="{ 'is-invalid': isInvalid }"
+    [required]="required"
+  ></textarea>
+
+  <div class="char-count">{{ remainingChars }} caracteres restantes</div>
+</div>

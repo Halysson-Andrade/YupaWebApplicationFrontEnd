@@ -1,0 +1,25 @@
+.permission-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .page-header{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        app-button{
+            width: 150px;
+        }
+
+    }
+    .page-body{
+        width: 100%;
+
+    }
+    .page-footer{
+
+    }
+}

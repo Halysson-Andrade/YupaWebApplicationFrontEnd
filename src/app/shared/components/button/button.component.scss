@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     width: 100%;
     cursor: pointer;
     border-radius: 2rem;
@@ -12,7 +13,7 @@
 
         ::ng-deep span {
             color: var(--primaryColor);
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
         }
     }
@@ -24,7 +25,7 @@
 
         ::ng-deep span {
             color: #999;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
         }
     }
@@ -37,7 +38,7 @@
 
         ::ng-deep span {
             color: #FFF;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
         }
     }
@@ -49,8 +50,46 @@
 
         ::ng-deep span {
             color: #999;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
+        }
+    }
+
+    &-new {
+        background-color: var(--primaryColor);
+        opacity: 0.9;
+        width: 100%;
+        border: solid 1px transparent;
+
+        ::ng-deep i {
+            color: #FFF;
+            line-height: 1;
+        }
+
+        ::ng-deep span {
+            color: #FFF;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+    }
+
+    &-new2 {
+        background-color: #03A6A6;
+        opacity: 0.9;
+        width: 100%;
+        border: solid 1px transparent;
+
+        ::ng-deep i {
+            color: #FFF;
+            line-height: 1;
+        }
+
+        ::ng-deep span {
+            color: #FFF;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1;
         }
     }
 }

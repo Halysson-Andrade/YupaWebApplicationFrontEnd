@@ -1,0 +1,27 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div class="menu-page">
+  <div class="page-header">
+    
+  </div>
+  <div class="page-body">
+    <app-table
+      [data]="menusData"
+      [columns]="tableColumns"
+      [itemsPerPage]="itemsPerPage"
+      [currentPage]="currentPage"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+      >></app-table
+    >
+  </div>
+  <div class="page-footer">
+    <pagination-controls
+      class="custom-pagination"
+      [previousLabel]="'Anterior'"
+      [nextLabel]="'Próximo'"
+      [autoHide]="true"
+      (pageChange)="currentPage = $event"
+    ></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h1 class="modal-title">Selecione um arquivo para importação</h1>
+    </div>
+
+    <!-- Abas do Modal -->
+    <div class="modal-tabs">
+      <button (click)="switchTab(0)" [class.active]="activeTab === 0">Importação</button>
+    </div>
+
+    <!-- Corpo do Modal -->
+    <div class="modal-body">
+      <ng-container [ngSwitch]="activeTab">
+        <!-- Conteúdo da Aba 1 -->
+        <div *ngSwitchCase="0" class="form-grid">
+          <div class="form-grid1">
+
+            <!-- Botão de Importar CSV -->
+            <div class="csv-importer-container" *ngIf="!isUpdating">
+              <label for="fileInput" class="custom-upload-button-label">Importar Excel</label>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" class="custom-upload-button" />
+              <p *ngIf="fileName">{{ fileName }}</p>
+              <p *ngIf="!fileName">Nenhum arquivo selecionado</p>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Rodapé do Modal -->
+    <div class="modal-footer">
+      <button type="button" (click)="close()" class="btn-cancel">Cancelar</button>
+      <button type="submit" id="saveButton" (click)="onSaveClick($event)" class="btn-save">Salvar</button>
+    </div>
+  </div>
+</form>

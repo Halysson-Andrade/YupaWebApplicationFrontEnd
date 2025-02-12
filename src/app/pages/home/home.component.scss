@@ -1,11 +1,97 @@
-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    .red {
-        background-color: red;
-        height: 200px;
-        width: 200px;
+.home-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  position: relative; /* Necessário para os elementos de fundo */
+  background-image: url('https://thumbs.dreamstime.com/b/seguran%C3%A7a-de-dados-cibern%C3%A9ticos-ou-ideia-privacidade-informa%C3%A7%C3%B5es-cibern%C3%A9tica-e-prote%C3%A7%C3%A3o-rede-ilustra%C3%A7%C3%A3o-do-vetor-eps-165448318.jpg'); /* Imagem de fundo geral */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* A imagem permanece fixa ao rolar a página */
+  box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.8); /* Sobreposição para suavizar */
+  border-radius: 10px;
+
+  h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+
+  .intro-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #0056b3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .security-tips {
+    text-align: left;
+    margin-bottom: 2rem;
+    position: relative;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+
+        &:before {
+          content: '💡';
+          position: absolute;
+          left: 0;
+        }
+      }
     }
+  }
+
+  .motivational-section {
+    p {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      font-style: italic;
+      color: #444;
+    }
+  }
+}
+
+/* Adicionando um elemento decorativo de fundo para segurança */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 300px;
+  height: 300px;
+  background-image: url('https://thumbs.dreamstime.com/b/seguran%C3%A7a-de-dados-cibern%C3%A9ticos-ou-ideia-privacidade-informa%C3%A7%C3%B5es-cibern%C3%A9tica-e-prote%C3%A7%C3%A3o-rede-ilustra%C3%A7%C3%A3o-do-vetor-eps-165448318.jpg'); /* Ícone de segurança */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.2; /* Reduz a opacidade para suavidade */
+  z-index: -1; /* Coloca o elemento atrás do conteúdo */
+}
+
+.home-container::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 300px;
+  height: 300px;
+  background-image: url('https://thumbs.dreamstime.com/b/seguran%C3%A7a-de-dados-cibern%C3%A9ticos-ou-ideia-privacidade-informa%C3%A7%C3%B5es-cibern%C3%A9tica-e-prote%C3%A7%C3%A3o-rede-ilustra%C3%A7%C3%A3o-do-vetor-eps-165448318.jpg'); /* Ícone de segurança */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.2; /* Reduz a opacidade para suavidade */
+  z-index: -1; /* Coloca o elemento atrás do conteúdo */
 }

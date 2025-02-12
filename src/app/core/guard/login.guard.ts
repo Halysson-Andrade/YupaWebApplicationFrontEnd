@@ -21,7 +21,7 @@ export class LoginGuard implements CanActivate {
       if (this.authService.isChangePasswordRequired()) {
         this.router.navigate(['/troca-de-senha']);
       } else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/permissions']);
       }
       return false;
     }

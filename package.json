@@ -1,5 +1,5 @@
 {
-  "name": "projeto.front",
+  "name": "adeste",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -27,8 +27,10 @@
     "ngx-cookie-service": "^18.0.0",
     "ngx-echarts": "^18.0.0",
     "ngx-mask": "^18.0.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.14.1",
     "tslib": "^2.3.0",
     "zone.js": "0.14.10"
   },

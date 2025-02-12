@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ChangePasswordComponent],
-  imports: [CommonModule, ReactiveFormsModule, SharedModule],
+  imports: [CommonModule, SharedModule],
   exports: [ChangePasswordComponent],
 })
 export class ChangePasswordModule {}

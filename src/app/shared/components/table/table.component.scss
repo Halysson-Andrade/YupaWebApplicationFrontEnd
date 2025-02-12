@@ -1,0 +1,106 @@
+.table-responsive {
+    background-color: #FFF;
+    border-radius: 2rem;
+    padding: 2rem 2rem 1rem 2rem;
+
+    .table {
+        width: 100%;
+
+        thead {
+            tr {
+                th {
+                    text-align: left;
+                    color: #757575;
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    vertical-align: middle;
+                    padding: 0.5rem 1rem;
+                    background-color: #F7F8F9;
+                    text-wrap: nowrap;
+
+                    &:first-child {
+                        border-top-left-radius: 1rem;
+                        border-bottom-left-radius: 1rem;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 1rem;
+                        border-bottom-right-radius: 1rem;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                border-bottom: solid 1px #F7F8F9;
+
+                &:last-child {
+                    border: none;
+                }
+
+                td {
+                    font-size: 0.9rem;
+                    color: #141414;
+                    font-weight: 400;
+                    padding: 1rem;
+
+                    ::ng-deep .status-active {
+                        border: solid 1px #d4d4d8;
+                        border-radius: 1rem;
+                        background-color: #FFF;
+                        font-weight: 600;
+                        padding: 0.2rem 1rem 0.2rem 1.5rem;
+                        position: relative;
+                        font-size: 0.8rem;
+                        text-wrap: nowrap;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 6px;
+                            left: 8px;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%;
+                            background-color: #31bc31;
+                        }
+                    }
+
+                    ::ng-deep .status-inactive {
+                        border: solid 1px #d4d4d8;
+                        border-radius: 1rem;
+                        background-color: #FFF;
+                        font-weight: 600;
+                        padding: 0.2rem 1rem 0.2rem 1.5rem;
+                        position: relative;
+                        font-size: 0.8rem;
+                        text-wrap: nowrap;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 6px;
+                            left: 8px;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%;
+                            background-color: #d94b4b;
+                        }
+                    }
+
+                    button {
+                        margin-right: 0.6rem;
+                        cursor: pointer;
+
+                        i {
+                            font-size: 1.1rem;
+                            color: #141414;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

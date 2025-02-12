@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
         this.authService.isChangePasswordRequired() &&
         route.routeConfig?.path !== 'troca-de-senha'
       ) {
-        console.log(this.authService.isChangePasswordRequired);
         this.router.navigate(['/troca-de-senha']);
         return false;
       }
