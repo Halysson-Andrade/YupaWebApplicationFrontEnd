@@ -10,6 +10,7 @@ export interface CRUDInterface {
     enableLogging?: boolean;
     dateFormat?: string;
     refreshPage?:boolean;
+    array?: any[];
   };
 
 }

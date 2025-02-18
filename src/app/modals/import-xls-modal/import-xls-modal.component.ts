@@ -164,12 +164,20 @@ export class ImportXlsModalComponent {
 
   postData(): void {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.dialogData.config.token}`,
-      UserId: this.dialogData.config.userId,
+      Authorization: `Bearer ${sessionStorage.getItem('auth_token')}`,
+      UserId: sessionStorage.getItem('usr_id') ?? '', // Garante que não seja null
       'Content-Type': 'application/json'
     });
-
-    this.http.post<PostCreateUser>(`${this.environment.apiURL}/users/imports`, this.data, { headers })
+    console.log()
+    const modal = this.dialogData.config.modal
+    let route =''
+    if (modal == 'uploads'){
+      route = '/uploads'
+    }else{
+      route = '/users/imports'
+    }
+    
+    this.http.post<PostCreateUser>(`${this.environment.apiURL}${route}`, this.data, { headers })
       .subscribe({
         next: (response) => {
           this.toastr.success('Importação Cadastrada com sucesso!');

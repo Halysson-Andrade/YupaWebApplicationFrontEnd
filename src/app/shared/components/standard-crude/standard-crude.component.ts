@@ -130,6 +130,12 @@ export class StandardCrudeComponent implements OnChanges {
       this.loadPermissions(headers);
     }
 
+    if (this.config.modal === 'uploads') {
+      this.isLoading = true;
+      this.openDialog()
+      
+    }
+
     if (this.config.modal === 'system-modal') {
       this.isLoading = true;
       this.openDialog();
@@ -338,6 +344,21 @@ export class StandardCrudeComponent implements OnChanges {
         height: '63%',
         panelClass: 'custom-dialog-container',
         data: { registerData: this.systemData, config: this.config }
+      });
+      // Quando o diálogo for fechado
+      dialogRef.afterClosed().subscribe(() => {
+        this.closeAndReturn();
+        this.systemData = []
+      });
+    }
+
+    if (this.config.modal === 'uploads') {
+      const dialogRef: MatDialogRef<ImportXlsModalComponent> = this.dialog.open(ImportXlsModalComponent, {
+        width: '50%',
+        maxWidth: '2000px',
+        height: '40%',
+        panelClass: 'custom-dialog-container',
+        data: { registerData: '', config: this.config }
       });
       // Quando o diálogo for fechado
       dialogRef.afterClosed().subscribe(() => {

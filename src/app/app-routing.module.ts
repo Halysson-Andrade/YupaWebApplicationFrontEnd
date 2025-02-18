@@ -13,7 +13,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PermissionComponent } from './pages/permission/permission.component';
 import { CompanieComponent } from './pages/companie/companie.component';
 import { BranchesComponent } from './pages/branches/branches.component';
-import { BorrowersComponent } from './pages/borrowers/borrowers.component';
+import { CarsComponent } from './pages/cars/cars.component';
+import { UploadsComponent } from './pages/uploads/uploads.component';
+import { ChartsComponent } from './pages/charts/charts.component';
+import { ProcesslistComponent } from './pages/processlist/processlist.component';
+import { KanbanComponent } from './pages/kanban/kanban.component';
 import { ImportsComponent } from './pages/imports/imports.component';
 import { AutomationsComponent } from './pages/automations/automations.component';
 import { SystemsComponent } from './pages/systems/systems.component';
@@ -57,29 +61,26 @@ const routes: Routes = [
         component: CustomUsersComponent,
       },
       {
-        path: 'companies',
-        component: CompanieComponent,
+        path: 'cars',
+        component: CarsComponent,
       },
       {
-        path: 'branches',
-        component: BranchesComponent,
+        path: 'uploads',
+        component: UploadsComponent,
       },
       {
-        path: 'borrowers',
-        component: BorrowersComponent,
+        path: 'charts',
+        component: ChartsComponent,
       },
       {
-        path: 'imports',
-        component: ImportsComponent,
+        path: 'processlist',
+        component: ProcesslistComponent,
       },
       {
-        path: 'automations',
-        component: AutomationsComponent,
-      },
-      {
-        path: 'systems',
-        component: SystemsComponent,
-      },
+        path: 'kanban',
+        component: KanbanComponent,
+      },     
+      
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
