@@ -70,11 +70,11 @@ export class CustonUsersModalComponent {
   ) {
     this.form = this.fb.group({
       usr_email: ['', Validators.required],
-      usr_ad: ['', Validators.required],
-      usr_sucessFactory: ['', Validators.required],
-      usr_protheus: ['', Validators.required],
-      usr_sap: ['', Validators.required],
-      usr_vpn: ['', Validators.required],
+      //usr_ad: ['', Validators.required],
+      //usr_sucessFactory: ['', Validators.required],
+      //usr_protheus: ['', Validators.required],
+      //usr_sap: ['', Validators.required],
+      //usr_vpn: ['', Validators.required],
       usr_profile: ['', Validators.required],
       usr_status: [true, Validators.required],
       usr_name: ['', Validators.required],
@@ -97,11 +97,11 @@ export class CustonUsersModalComponent {
       const userData = this.dialogData.registerData[0];
       this.form.patchValue({
         usr_email: userData.Email || '',
-        usr_ad: userData.usr_ad || '',
-        usr_sucessFactory: userData.usr_sucessFactory || '',
-        usr_protheus: userData.usr_protheus || '',
-        usr_sap: userData.usr_sap || '',
-        usr_vpn: userData.usr_vpn || '',
+        //usr_ad: userData.usr_ad || '',
+        //usr_sucessFactory: userData.usr_sucessFactory || '',
+        //usr_protheus: userData.usr_protheus || '',
+        //usr_sap: userData.usr_sap || '',
+        //usr_vpn: userData.usr_vpn || '',
         usr_profile: userData.Perfil || '',
         usr_name: userData.Nome || '',
         usr_status: userData.Status === true || userData.Status === 'true' // Garante que será booleano
@@ -177,7 +177,7 @@ export class CustonUsersModalComponent {
         let id = this.dialogData.registerData[0].ID
         this.data = {
           ...this.form.value, usr_id: id,
-          sys_id: this.getSelectedSystemsIds(),
+          //sys_id: this.getSelectedSystemsIds(),
           pms_id: this.getSelectedPermissionsIds()
         };
         this.isLoading = true;
@@ -188,7 +188,7 @@ export class CustonUsersModalComponent {
       } else {
         this.data = {
           ...this.form.value,
-          sys_id: this.getSelectedSystemsIds(),
+          //sys_id: this.getSelectedSystemsIds(),
           pms_id: this.getSelectedPermissionsIds()
         };
         this.isLoading = true;
@@ -215,7 +215,10 @@ export class CustonUsersModalComponent {
     this.http.post<PostCreateUser>(`${this.environment.apiURL}/${this.dialogData.config.apiRoute}`, this.data, { headers })
       .subscribe({
         next: (response) => {
-          this.postDataAuth();
+          //this.postDataAuth();
+          this.toastr.success('Usuário cadastrado com sucesso!');
+          this.isLoading = false;
+          this.closeAndRefresh(); // Fecha o modal e atualiza a tela
         },
         error: (err) => {
           this.isLoading = false;

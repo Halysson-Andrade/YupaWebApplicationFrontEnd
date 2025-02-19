@@ -275,7 +275,8 @@ export class StandardCrudeComponent implements OnChanges {
             'Data atualização': item.prf_updated_at,
           }));
 
-          this.loadSystems(headers);
+          //this.loadSystems(headers);
+          this.openDialog();
         },
         (err) => {
           // Manipula erro da busca de automações

@@ -20,11 +20,11 @@ export interface UserData {
   'Perfil': number;
   'Email': string;
   'Nome': string;
-  'usr_ad': string;
-  'usr_protheus': string;
-  'usr_sucessFactory': string;
-  'usr_sap': string;
-  'usr_vpn': string;
+  //'usr_ad': string;
+  //'usr_protheus': string;
+  //'usr_sucessFactory': string;
+  //'usr_sap': string;
+  //'usr_vpn': string;
   'Status': boolean;
   'Pemissoes': [];
   'Systems': [];

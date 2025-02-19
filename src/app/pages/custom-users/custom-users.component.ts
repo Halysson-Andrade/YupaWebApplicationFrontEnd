@@ -79,11 +79,11 @@ export class CustomUsersComponent {
               'Perfil': item.usr_profile,
               'Pemissoes': item.permissions,
               'Systems': item.systems,
-              'usr_ad': item.usr_ad,
-              'usr_protheus': item.usr_protheus,
-              'usr_sucessFactory': item.usr_sucessFactory,
-              'usr_sap': item.usr_sap,
-              'usr_vpn': item.usr_vpn,
+              //'usr_ad': item.usr_ad,
+              //'usr_protheus': item.usr_protheus,
+              //'usr_sucessFactory': item.usr_sucessFactory,
+              //'usr_sap': item.usr_sap,
+              //'usr_vpn': item.usr_vpn,
             }));
 
           },

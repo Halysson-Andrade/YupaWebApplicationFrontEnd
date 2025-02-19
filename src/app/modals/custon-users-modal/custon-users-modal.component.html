@@ -11,7 +11,7 @@
     <div class="modal-tabs">
       <button (click)="switchTab(0)" [class.active]="activeTab === 0">Dados usuário</button>
       <button (click)="switchTab(1)" [class.active]="activeTab === 1">Permissionamento</button>
-      <button (click)="switchTab(2)" [class.active]="activeTab === 2">Permissões WhatsApp</button>
+      <!--<button (click)="switchTab(2)" [class.active]="activeTab === 2">Permissões WhatsApp</button> -->
     </div>
 
     <!-- Corpo do Modal -->
@@ -57,61 +57,7 @@
                   Status do sistema é obrigatório.
                 </div>
               </div>
-
             </div>
-          </div>
-          <p style="margin-top: 20px;"> </p>
-          <strong>Usuário dos sistemas</strong>
-          <p style="margin-top: 10px;"> </p>
-          <div class="form-grid3">
-            <div class="form-group">
-              <label for="usr_ad">AD</label>
-              <input type="text" id="usr_ad" formControlName="usr_ad" placeholder="Digite o usuário"
-                [attr.disabled]="!isEditing ? true : null" />
-              <div *ngIf="form.get('usr_ad')?.invalid && form.get('usr_ad')?.touched" class="error">
-                Usuário obrigatório
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="usr_protheus">Protheus</label>
-              <input type="text" id="usr_protheus" formControlName="usr_protheus" placeholder="Digite o usuário"
-                [attr.disabled]="!isEditing ? true : null" />
-              <div *ngIf="form.get('usr_protheus')?.invalid && form.get('usr_protheus')?.touched" class="error">
-                Usuário obrigatório
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="usr_sucessFactory">Sucess Factory</label>
-              <input type="text" id="usr_sucessFactory" formControlName="usr_sucessFactory"
-                placeholder="Digite o usuário" [attr.disabled]="!isEditing ? true : null" />
-              <div *ngIf="form.get('usr_sucessFactory')?.invalid && form.get('usr_sucessFactory')?.touched"
-                class="error">
-                Usuário obrigatório
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="usr_sap">Sap</label>
-              <input type="text" id="usr_sap" formControlName="usr_sap" placeholder="Digite o usuário"
-                [attr.disabled]="!isEditing ? true : null" />
-              <div *ngIf="form.get('usr_sap')?.invalid && form.get('usr_sap')?.touched" class="error">
-                Usuário obrigatório
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="usr_vpn">VPN</label>
-              <input type="text" id="usr_vpn" formControlName="usr_vpn" placeholder="Digite o usuário"
-                [attr.disabled]="!isEditing ? true : null" />
-              <div *ngIf="form.get('usr_vpn')?.invalid && form.get('usr_vpn')?.touched" class="error">
-                Usuário obrigatório
-              </div>
-            </div>
-
-
-
           </div>
         </div>
 
