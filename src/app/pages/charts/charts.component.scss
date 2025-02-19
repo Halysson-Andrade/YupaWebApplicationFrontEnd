@@ -1,0 +1,125 @@
+/* Container principal para o layout */
+.chart-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  /* Container do cabeçalho da página */
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    /* Container para os inputs e botão de filtro */
+    .filter-container {
+      display: flex;
+      height: 100px;
+      width: 100%;
+      gap: 60px;
+      background-color: white;
+      border-radius: 4px;
+
+      .cc-filter {
+        position: relative;
+        width: 100%;
+        min-width: 100px;
+        /* Garantir que o campo tenha largura suficiente */
+        max-width: 500px;
+        /* Largura mínima garantida */
+      }
+
+      mat-form-field {
+        width: 100%;
+        min-width: 100px;
+        /* Largura mínima garantida */
+        max-width: 500px;
+        /* Largura mínima garantida */
+        height: 80px;
+        /* Deixar o campo expandir conforme necessário */
+        display: block;
+      }   
+
+      mat-select {
+        width: 100%;
+        min-height: 56px;
+        /* Altura mínima padrão */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      /* Remove ou estiliza a linha preta abaixo do campo */
+      .mdc-line-ripple::before,
+      .mdc-line-ripple::after {
+        display: none; /* Remove completamente a linha preta */
+      }
+
+      /* Estilo para os inputs de data */
+      .date-filter {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        input[type="text"] {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          width: 150px;
+        }
+
+        /* Estilo para o botão "Gerar Gráficos" */
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          background-color: #007bff;
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        button:hover,
+        button:focus {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+
+  /* Container do corpo da página */
+  .page-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    /* Seção dos gráficos */
+    .charts-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      /* Container para cada gráfico */
+      .chart-container {
+        flex: 1 1 calc(50% - 20px);
+        box-sizing: border-box;
+        height: 450px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .chart-container-custom {
+        flex: auto;
+        box-sizing: border-box;
+        height: 450px;
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

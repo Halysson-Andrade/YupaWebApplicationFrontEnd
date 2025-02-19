@@ -1,0 +1,48 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<div class="modal-overlay">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h2>{{ data.name }}</h2>
+      <button (click)="onClose()" class="close-btn">
+        <mat-icon>X</mat-icon>
+      </button>
+    </div>
+
+    <!-- Campo de busca -->
+    <div class="search-container">
+      <input type="text" placeholder="Buscar..." (input)="applyFilter($event)" />
+    </div>
+
+    <!-- Corpo do Modal sem Virtual Scroll -->
+    <div class="modal-body">
+      <div class="table-container" #tableContainer>
+        <table mat-table [dataSource]="dataSource" class="mat-table">
+          <!-- Colunas criadas dinamicamente -->
+          <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef> {{ column | titlecase }} </th>
+            <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+          </ng-container>
+
+          <!-- Definição de Cabeçalho e Linhas da Tabela -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="sticky-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <!-- Paginação -->
+      <div class="pagination">
+        <mat-paginator [pageSize]="20"></mat-paginator>
+      </div>
+    </div>
+
+    <!-- Ações do Modal -->
+    <div class="modal-footer">
+      <button mat-button class="close" (click)="onClose()">
+        <span>Fechar</span>
+      </button>
+      <button mat-button class="confirm-btn" (click)="exportData()">
+        <span>Exportar</span>
+      </button>
+    </div>
+  </div>
+</div>
