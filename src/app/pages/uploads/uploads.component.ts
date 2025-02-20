@@ -13,18 +13,14 @@ import { Subscription, Timestamp } from 'rxjs';
 interface data {
   'Status': number;
   'Nome': string;
-  'Blob Container Name': string;
-  'Blob URL': string;
-
 }
 
 interface coleteData {
   'Status': number;
   'Nome': string;
-  'Blob Container Name': string;
-  'Blob URL': string;
   'Total Importado': number;
   'Total com Erro': number;
+  'Data da Criacão': string;
   'Detail Error': [];
   'Detail no Error': [];
 }
@@ -41,6 +37,7 @@ interface ApiResponse {
     Error: number;
     ErrorResults: [];
     noErrorResults: [];
+    imp_created_at:string;
   }]
 }
 
@@ -125,12 +122,11 @@ export class UploadsComponent {
             this.coleteData = response.data.map(item => ({
               'Status': item.imp_status,
               'Nome': item.imp_name,
-              'Blob Container Name': item.imp_container_name,
-              'Blob URL': item.imp_blob_path,
-              'Total Importado': item.total_imported,
+              'Total Importado': item.total_imported  ?? 0,
               'Total com Erro': item.Error ?? 0,  // Define 0 se não existir
               'Detail Error': item.ErrorResults ?? [],
               'Detail no Error': item.noErrorResults ?? [],
+              'Data da Criacão': item.imp_created_at ?? '01/01/01'
 
             }));
             console.log("Data importação")

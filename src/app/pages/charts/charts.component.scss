@@ -44,7 +44,7 @@
         width: 100%;
         min-height: 56px;
         /* Altura mínima padrão */
-        border: 1px solid #ccc;
+        border: 1px solid #42adc8;
         border-radius: 4px;
       }
 
@@ -62,7 +62,7 @@
 
         input[type="text"] {
           padding: 10px;
-          border: 1px solid #ccc;
+          border: 1px solid #42adc8;
           border-radius: 4px;
           font-size: 16px;
           width: 150px;
@@ -123,3 +123,192 @@
     }
   }
 }
+
+.home-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  position: relative;
+  
+  /* Nova imagem de fundo */
+  background-image: url('https://source.unsplash.com/1600x900/?workflow,technology');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Sobreposição para melhor legibilidade */
+  box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+}
+
+/* Títulos */
+h1 {
+  font-size: 2.5rem;
+  color: #004085;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #0056b3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.intro-message {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+/* Seção de Dicas */
+.security-tips {
+  text-align: left;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.security-tips ul {
+  list-style: none;
+  padding: 0;
+}
+
+.security-tips li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.security-tips li::before {
+  content: '🔹';
+  position: absolute;
+  left: 0;
+  color: #0056b3;
+}
+
+/* Motivação */
+.motivation-section p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-style: italic;
+  color: #444;
+}
+
+/* 🌟 Estilização do Kanban */
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.kanban-column {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.kanban-column h3 {
+  font-size: 1.3rem;
+  color: #004085;
+  margin-bottom: 0.5rem;
+}
+
+/* Elementos decorativos */
+.home-container::before,
+.home-container::after {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.home-container::before {
+  top: 5%;
+  left: 2%;
+  background-image: url('https://source.unsplash.com/300x300/?data,security');
+}
+
+.home-container::after {
+  bottom: 5%;
+  right: 2%;
+  background-image: url('https://source.unsplash.com/300x300/?workflow,process');
+}
+.kanban-overview {
+  margin-bottom: 20px;
+}
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); // 🔹 Exatamente 5 colunas por linha
+  gap: 16px;
+  padding: 16px;
+  justify-content: center;
+}
+
+.kanban-column {
+  background-color: #f4f4f4;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  border: none;
+  min-width: 180px;
+}
+
+.kanban-column:hover {
+  transform: scale(1.05);
+  background-color: #e0e0e0;
+}
+
+.kanban-column h3 {
+  margin-bottom: 5px;
+}
+
+button {
+  background: #007bff;
+  color: rgb(32, 32, 32);
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 1024px) {
+  .kanban-board {
+    grid-template-columns: repeat(3, 1fr); // 🔹 Em telas menores, 3 colunas por linha
+  }
+}
+
+@media (max-width: 768px) {
+  .kanban-board {
+    grid-template-columns: repeat(2, 1fr); // 🔹 Em tablets, 2 colunas por linha
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-board {
+    grid-template-columns: repeat(1, 1fr); // 🔹 Em celulares, 1 coluna por linha
+  }
+}
+

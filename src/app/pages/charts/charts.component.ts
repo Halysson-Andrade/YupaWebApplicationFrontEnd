@@ -19,6 +19,13 @@ interface Technician {
   details: {
   }[];
 }
+interface KanbanStatus {
+  id: string;
+  nome: string;
+  emoji: string;
+  quantidade: number;
+}
+
 interface CentroCusto {
   flt_id: number;
   flt_name: string;
@@ -92,6 +99,13 @@ export class ChartsComponent implements OnInit {
   centroCusto: CentroCusto[] = [];
   selectedItems: string[] = [];
   allSelected: boolean = false; // Flag para controlar "Selecionar todos"
+  kanbanStatus: KanbanStatus[] = [
+    { id: 'processos-dia', nome: 'Processos do Dia', emoji: '📅', quantidade: 45 },
+    { id: 'restricao', nome: 'Restrições', emoji: '📌', quantidade: 15 },
+    { id: 'debitos', nome: 'Débitos', emoji: '💰', quantidade: 12 },
+    { id: 'pendencias', nome: 'Pendências', emoji: '⚠️', quantidade: 7 },
+    { id: 'finalizados', nome: 'Finalizados', emoji: '✅', quantidade: 40 }   
+  ];
 
   constructor(
     private dialog: MatDialog,
@@ -147,22 +161,17 @@ export class ChartsComponent implements OnInit {
   }
   ngAfterViewInit() {
     // Adiciona o ouvinte de evento após o mat-select ser renderizado
-    this.matSelect.openedChange.subscribe(open => {
-      if (open) {
-        const panel = document.querySelector('.cdk-overlay-pane');
-        if (panel) {
-          panel.addEventListener('mouseleave', () => {
-            this.matSelect.close(); // Fecha o mat-select quando o mouse sai do painel
-          });
-        }
-      }
-    });
+    
   }
 
   onStartDateInput(event: Event): void {
     const input = (event.target as HTMLInputElement).value;
     this.startDateInput = this.formatDateInput(input);
     this.startDate = this.parseDate(this.startDateInput);
+  }
+  abrirModal(tipo: string) {
+    console.log(`Abrindo modal para: ${tipo}`);
+    // Aqui você pode chamar um serviço de modal ou definir uma variável de exibição
   }
 
   onEndDateInput(event: Event): void {

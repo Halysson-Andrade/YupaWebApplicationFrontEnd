@@ -5,7 +5,7 @@
     <div class="filter-container">
       <!-- Inputs de data diretamente no HTML -->
       <div class="cc-filter">
-       
+
       </div>
       <div class="date-filter">
         Filtro de data
@@ -18,19 +18,32 @@
     </div>
   </div>
 
+  <div class="kanban-overview">
+    <div class="kanban-board">
+      <!-- 🔹 Criando os botões dinamicamente -->
+      <button 
+        *ngFor="let status of kanbanStatus" 
+        class="kanban-column" 
+        (click)="abrirModal(status.nome)">
+        <h3>{{ status.emoji }} {{ status.nome }}</h3>
+        <p>{{ status.quantidade }}</p>
+      </button>
+    </div>
+  </div>
+
   <div class="page-body">
     <section>
       <!-- Gráficos -->
       <div class="charts-section">
 
-        
+
         <div class="chart-container">
           <p class="chart-title">Processos por dia</p>
           <div echarts [options]="chartBarSumary" class="charts-bar" (chartInit)="onChartInit($event, 'barSumary')">
           </div>
         </div>
 
-        
+
 
       </div>
     </section>
