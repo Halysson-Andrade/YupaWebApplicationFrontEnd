@@ -44,7 +44,7 @@
         width: 100%;
         min-height: 56px;
         /* Altura mínima padrão */
-        border: 1px solid #42adc8;
+        border: 1px solid #ccc;
         border-radius: 4px;
       }
 
@@ -62,7 +62,7 @@
 
         input[type="text"] {
           padding: 10px;
-          border: 1px solid #42adc8;
+          border: 1px solid #ccc;
           border-radius: 4px;
           font-size: 16px;
           width: 150px;
@@ -255,7 +255,7 @@ h2 {
 
 .kanban-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 🔹 Exatamente 5 colunas por linha
+  grid-template-columns: repeat(4, 1fr); // 🔹 Exatamente 5 colunas por linha
   gap: 16px;
   padding: 16px;
   justify-content: center;
@@ -311,4 +311,3 @@ button:hover {
     grid-template-columns: repeat(1, 1fr); // 🔹 Em celulares, 1 coluna por linha
   }
 }
-

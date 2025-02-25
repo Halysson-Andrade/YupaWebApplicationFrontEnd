@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,10 +46,18 @@ interface ApiResponse {
       pieDays?: EChartsOption;
       chartBarBoss?: EChartsOption;
       chartPiePetrol?: EChartsOption;
-      chartBossPetrol?:EChartsOption;
+      chartBossPetrol?: EChartsOption;
       chartLineTsk?: EChartsOption;
       chartTimeLine?: EChartsOption;
-      chartLineProt?: EChartsOption;      
+      chartLineProt?: EChartsOption;
+    },
+    EChartskanban: {
+      kanban: {
+        restricao?: number;
+        debits?: number;
+        pend?: number;
+        finalizados?: number;
+      }
     };
   };
 }
@@ -100,11 +108,10 @@ export class ChartsComponent implements OnInit {
   selectedItems: string[] = [];
   allSelected: boolean = false; // Flag para controlar "Selecionar todos"
   kanbanStatus: KanbanStatus[] = [
-    { id: 'processos-dia', nome: 'Processos do Dia', emoji: '📅', quantidade: 45 },
-    { id: 'restricao', nome: 'Restrições', emoji: '📌', quantidade: 15 },
-    { id: 'debitos', nome: 'Débitos', emoji: '💰', quantidade: 12 },
-    { id: 'pendencias', nome: 'Pendências', emoji: '⚠️', quantidade: 7 },
-    { id: 'finalizados', nome: 'Finalizados', emoji: '✅', quantidade: 40 }   
+    { id: 'restricao', nome: 'Restrições', emoji: '📌', quantidade: 0 },
+    { id: 'debitos', nome: 'Débitos', emoji: '💰', quantidade: 0 },
+    { id: 'pendencias', nome: 'Pendências', emoji: '⚠️', quantidade: 0 },
+    { id: 'finalizados', nome: 'Finalizados', emoji: '✅', quantidade: 0 }
   ];
 
   constructor(
@@ -159,9 +166,16 @@ export class ChartsComponent implements OnInit {
   onItemSelectionChange() {
     this.allSelected = this.selectedItems.length === this.items.length; // Verifica se todos os itens estão selecionados
   }
-  ngAfterViewInit() {
-    // Adiciona o ouvinte de evento após o mat-select ser renderizado
-    
+  removeError() {
+    // Encontrar o elemento com a classe .cdk-overlay-pane
+    const overlayPane = document.querySelector('.cdk-overlay-pane');
+
+    if (overlayPane) {
+      // Manipular o estilo diretamente
+      this.renderer.setStyle(overlayPane, 'width', '0px');
+      this.renderer.setStyle(overlayPane, 'height', '0px');
+      this.renderer.setStyle(overlayPane, 'margin-top', '0');
+    }
   }
 
   onStartDateInput(event: Event): void {
@@ -212,15 +226,15 @@ export class ChartsComponent implements OnInit {
   loadCharts(): void {
     this.isLoading = true; // Exibe o componente de loading
     console.log(this.selectedItems)
-    this.chartPieSumary = {};
+    //this.chartPieSumary = {};
     this.chartBarSumary = {};
-    this.chartPiedays = {};
-    this.chartBarBoss = {};
-    this.chartPiePetrol = {};
-    this.chartBossPetrol= {};
-    this.chartLineTsk = {};
-    this.chartTimeLine = {};
-    this.chartLineProt = {};
+    //this.chartPiedays = {};
+    //this.chartBarBoss = {};
+    //this.chartPiePetrol = {};
+    //this.chartBossPetrol= {};
+    //this.chartLineTsk = {};
+    //this.chartTimeLine = {};
+    //this.chartLineProt = {};
     this.userId = sessionStorage.getItem('usr_id');
     const token = sessionStorage.getItem('auth_token');
     if (token) {
@@ -242,20 +256,27 @@ export class ChartsComponent implements OnInit {
         .subscribe(
           (response: ApiResponse) => {
             this.techniciansData = response.data.EChartsData.techniciansData;
-            this.chartPieSumary = response.data.EChartsOption.pie || {};
+            //this.chartPieSumary = response.data.EChartsOption.pie || {};
             this.chartBarSumary = response.data.EChartsOption.bar || {};
-            this.chartPiedays = response.data.EChartsOption.pieDays || {};
-            this.chartBarBoss = response.data.EChartsOption.chartBarBoss || {};
-            this.chartPiePetrol = response.data.EChartsOption.chartPiePetrol || {};
-            this.chartBossPetrol = response.data.EChartsOption.chartBossPetrol || {};
-            this.chartLineTsk = response.data.EChartsOption.chartLineTsk || {};
-            this.chartTimeLine = response.data.EChartsOption.chartTimeLine || {};
-            this.chartLineProt = response.data.EChartsOption.chartLineProt || {};
-            console.log("Chegou aqui!")
-            console.log(response.data.EChartsOption.chartBossPetrol)
+            this.kanbanStatus[0].quantidade = response.data.EChartskanban.kanban.restricao || 0;
+            this.kanbanStatus[1].quantidade = response.data.EChartskanban.kanban.debits || 0;
+            this.kanbanStatus[2].quantidade = response.data.EChartskanban.kanban.pend || 0;
+            this.kanbanStatus[3].quantidade = response.data.EChartskanban.kanban.finalizados || 0;
+
+            //this.chartPiedays = response.data.EChartsOption.pieDays || {};
+            //this.chartBarBoss = response.data.EChartsOption.chartBarBoss || {};
+            //this.chartPiePetrol = response.data.EChartsOption.chartPiePetrol || {};
+            //this.chartBossPetrol = response.data.EChartsOption.chartBossPetrol || {};
+            //this.chartLineTsk = response.data.EChartsOption.chartLineTsk || {};
+            //this.chartTimeLine = response.data.EChartsOption.chartTimeLine || {};
+            //this.chartLineProt = response.data.EChartsOption.chartLineProt || {};
+            //console.log("Chegou aqui!")
+            //console.log(response.data.EChartsOption.chartBossPetrol)
             // Cria o índice uma vez após carregar os dados
             this.technicianIndex = new Map(this.techniciansData.map(item => [item.name, item]));
+            console.log(response.data.EChartskanban)
           },
+
           (err) => {
             this.isLoading = false;
             this.errorMessage = this.extractErrorMessage(err);
@@ -307,8 +328,21 @@ export class ChartsComponent implements OnInit {
       }
     };
     const dialogRef = this.dialog.open(LegendModalComponent, dialogConfig);
+    dialogRef.afterOpened().subscribe(() => {
+      this.applyCustomStyles();
+    });
   }
 
+  applyCustomStyles(): void {
+    const overlayPane = document.querySelector('.cdk-overlay-pane') as HTMLElement;
+    if (overlayPane) {
+      overlayPane.style.width = '0px';
+      overlayPane.style.height = '0px';
+      overlayPane.style.marginTop = '0';
+      overlayPane.style.backgroundColor = 'transparent';  // Exemplo de fundo transparente
+    }
+  }
+  
   extractErrorMessage(error: any): string {
     if (error.error && error.error.message) {
       return error.error.message;

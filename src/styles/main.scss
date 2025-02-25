@@ -2,3 +2,9 @@
 @import 'base/variables';
 @import 'base/mixins';
 @import 'base/typography';
+
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
+  display: none; /* Remove completamente a linha preta */
+}
+
