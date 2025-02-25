@@ -39,20 +39,19 @@
           <!-- Aplica a condição somente se config.modal for 'imports' e apenas na primeira coluna -->
           <td *ngFor="let column of columns; let i = index">
             <span
-              *ngIf="(config.modal === 'Custom-Users' && i === 0) || (config.modal === 'system-modal' && i === 0); else normalContent"
+              *ngIf="(config.modal === 'Custom-Users' && i === 0) || (config.modal === 'system-modal' && i === 0 ) || (config.modal === 'processList' && i === 0 )|| (config.modal === 'uploads' && i === 0 ); else normalContent"
               [ngClass]="{
-                    'status-active': row[column] === true, 
-                    'status-inactive': row[column] === false
+                    'status-active': row[column] === true || row[column] === 1, 
+                    'status-inactive': row[column] === false || row[column] === 0
                   }">
-              {{ row[column] === false ? 'Inativo' : (row[column] === true ? 'Ativo' :
-              row[column]) }}
+              {{ row[column] === false || row[column] === 0 ? 'Inativo' : (row[column] === true || row[column] === 1 ? 'Ativo' : 'Desconhecido') }}
             </span>
             <!-- Exibe o valor normal para colunas que não são a primeira ou se config.modal for diferente de 'companies' -->
             <ng-template #normalContent>{{ row[column] }}</ng-template>
           </td>
 
           <!-- Botões de ação -->
-          <td class="action-buttons">
+          <td class="action-buttons" *ngIf="config.modal !== 'uploads'">
             <button class="edit-button" (click)="editRecord(row)" aria-label="Editar registro">
               <i class="ph-bold ph-pencil"></i>
             </button>

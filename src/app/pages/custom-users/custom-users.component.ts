@@ -5,8 +5,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CRUDInterface } from '../../shared/interfaces/CRUD.interface'
 import { UserData, ApiResponse } from '../../shared/interfaces/users.interfaces'
-
-
 import { NavigationService } from '../../core/services/nav/nav.servevice';
 import { ToastrService } from 'ngx-toastr';
 

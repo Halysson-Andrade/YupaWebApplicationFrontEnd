@@ -131,6 +131,7 @@ export class UploadsComponent {
             }));
             console.log("Data importação")
             console.log(this.coleteData)
+            console.log(response)
             //this.data = this.coleteData.map(({ 'Detail Error': _, 'Detail no Error': __, ...rest }) => rest);
             this.data = this.coleteData.map(({ 'Detail Error': _, 'Detail no Error': __, ...rest }) => rest);
 
