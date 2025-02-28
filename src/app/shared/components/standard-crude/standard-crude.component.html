@@ -38,17 +38,26 @@
         <tr *ngFor="let row of paginatedData">
           <!-- Aplica a condição somente se config.modal for 'imports' e apenas na primeira coluna -->
           <td *ngFor="let column of columns; let i = index">
-            <span
-              *ngIf="(config.modal === 'Custom-Users' && i === 0) || (config.modal === 'system-modal' && i === 0 ) || (config.modal === 'processList' && i === 0 )|| (config.modal === 'uploads' && i === 0 ); else normalContent"
-              [ngClass]="{
-                    'status-active': row[column] === true || row[column] === 1, 
-                    'status-inactive': row[column] === false || row[column] === 0
-                  }">
-              {{ row[column] === false || row[column] === 0 ? 'Inativo' : (row[column] === true || row[column] === 1 ? 'Ativo' : 'Desconhecido') }}
+            <span *ngIf="(i === 0 || (i >= 7 && i <= 14)) && 
+                         ((config.modal === 'Custom-Users') || 
+                         (config.modal === 'system-modal') || 
+                         (config.modal === 'processList') || 
+                         (config.modal === 'uploads')); else normalContent" [ngClass]="{
+                     'status-active': row[column] === true || row[column] === 1, 
+                     'status-inactive': row[column] === false || row[column] === 0
+                   }">
+              <!-- Exibe '🚫' ou '✅' para as colunas de índice 7 a 14 e 'Ativo' ou 'Inativo' para a coluna 0 -->
+              {{ (i === 0) ? (row[column] === false || row[column] === 0 ? 'Inativo' :
+              (row[column] === true || row[column] === 1 ? 'Ativo' : 'Desconhecido')) :
+              (row[column] === false || row[column] === 0 ? 'Nok' :
+              (row[column] === true || row[column] === 1 ? 'Ok' : '')) }}
             </span>
-            <!-- Exibe o valor normal para colunas que não são a primeira ou se config.modal for diferente de 'companies' -->
+
+            <!-- Exibe o valor normal para outras colunas ou se config.modal for diferente de 'companies' -->
             <ng-template #normalContent>{{ row[column] }}</ng-template>
           </td>
+
+
 
           <!-- Botões de ação -->
           <td class="action-buttons" *ngIf="config.modal !== 'uploads'">
