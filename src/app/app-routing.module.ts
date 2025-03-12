@@ -18,10 +18,9 @@ import { UploadsComponent } from './pages/uploads/uploads.component';
 import { ChartsComponent } from './pages/charts/charts.component';
 import { ProcesslistComponent } from './pages/processlist/processlist.component';
 import { KanbanComponent } from './pages/kanban/kanban.component';
-import { ImportsComponent } from './pages/imports/imports.component';
-import { AutomationsComponent } from './pages/automations/automations.component';
-import { SystemsComponent } from './pages/systems/systems.component';
 import { CustomUsersComponent } from './pages/custom-users/custom-users.component';
+import { UfsComponent } from './pages/ufs/ufs.component';
+import { DocumentsComponent } from './pages/documents/documents.component';
 
 
 const routes: Routes = [
@@ -79,6 +78,14 @@ const routes: Routes = [
       {
         path: 'kanban',
         component: KanbanComponent,
+      }, 
+      {
+        path: 'ufs',
+        component: UfsComponent,
+      }, 
+      {
+        path: 'documents',
+        component: DocumentsComponent,
       },     
       
       { path: '', redirectTo: 'home', pathMatch: 'full' },

@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ImportXlsModalComponent } from "../../../../app/modals/import-xls-modal/import-xls-modal.component";
 import { SystemModalComponent } from "../../../../app/modals/system-modal/system-modal.component";
 import { CustonUsersModalComponent } from "../../../../app/modals/custon-users-modal/custon-users-modal.component";
+import { UfModalComponent } from "../../../../app/modals/uf-modal/uf-modal.component";
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { CRUDInterface } from '../../interfaces/CRUD.interface';
 import { PermissionData, PermissionApiResponse, ApiResponse, UserData } from '../../interfaces/users.interfaces'
+import { UfData, ApiUfResponse, PostCreateUF } from '../../interfaces/ufs.interfaces'
 import { ProfileResponse, ProfileData } from '../../interfaces/profiles.interfaces'
 import { Data, SystemResponse } from '../../interfaces/systems.interfaces'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -37,6 +39,7 @@ export class StandardCrudeComponent implements OnChanges {
   permissionData: PermissionData[] = []
   systemData: Data[] = []
   userData: UserData[] = []
+  ufData: UfData[] = []
   profileData: ProfileData[] = []
   columns: string[] = [];
   paginatedData: any[] = [];
@@ -133,12 +136,11 @@ export class StandardCrudeComponent implements OnChanges {
     if (this.config.modal === 'uploads') {
       this.isLoading = true;
       this.openDialog()
-      
     }
 
-    if (this.config.modal === 'system-modal') {
+    if (this.config.modal === 'Ufs') {
       this.isLoading = true;
-      this.openDialog();
+      this.openDialog()
     }
   }
 
@@ -169,44 +171,17 @@ export class StandardCrudeComponent implements OnChanges {
       UserId: sessionStorage.getItem('usr_id') || '',  // Tratando null ou undefined
     });
 
-    if (this.config.modal === 'system-modal') {
-      this.isLoading = true;
-      this.loadSystem(headers, id);
-    }
     if (this.config.modal === 'Custom-Users') {
       this.isLoading = true;
       this.loadUser(headers, id);
     }
+
+    if (this.config.modal === 'Ufs') {
+      this.isLoading = true;
+      this.loadUf(headers, id);
+    }
   }
-  private loadSystem(headers: HttpHeaders, id: number) {
-    this.http
-      .get<SystemResponse>(`${this.config.environment}/${this.config.apiRoute}/read`, {
-        headers,
-        params: { sys_id: id.toString() }
-      })
-      .subscribe(
-        (response: SystemResponse) => {
-          this.systemData = response.data.map(item => ({
-            'ID': item.sys_id,
-            'Status': item.sys_status,
-            'Nome': item.sys_name,
-            'Descrição': item.sys_description,
-            'Credencial': item.sys_credential,
-            'Secret': item.sys_secret,
-            'URL': item.sys_url,
-            'Segurança': item.sys_security,
-            'Pasta': item.sys_path,
-            'Data criação': item.sys_created_at,
-            'Data atualização': item.sys_updated_at,
-          }));
-          this.openDialog();
-        },
-        (err) => {
-          // Manipula erro da busca de automações
-          this.handleError(err);
-        },
-      );
-  }
+
   private loadUser(headers: HttpHeaders, id: number) {
     console.log(this.config.apiRoute)
     this.http
@@ -233,6 +208,34 @@ export class StandardCrudeComponent implements OnChanges {
           console.log("Dados carregados User Data")
           console.log(this.userData)
           this.loadPermissions(headers);
+        },
+        (err) => {
+          // Manipula erro da busca de automações
+          this.handleError(err);
+        },
+      );
+  }
+
+  private loadUf(headers: HttpHeaders, id: number) {
+    console.log(this.config.apiRoute)
+    this.http
+      .get<ApiUfResponse>(`${this.config.environment}/${this.config.apiRoute}/read`, {
+        headers,
+        params: { uf_id: id.toString() }
+      })
+      .subscribe(
+        (response: ApiUfResponse) => {
+          this.ufData = response.data.map(item => ({
+            'ID': item.uf_id,
+            'UF': item.uf_code,
+            'Status': item.uf_state,
+            'Nome': item.uf_name,
+            'IBGE': item.uf_ibge_code,
+            'Região': item.uf_region,
+          }));
+          console.log("Dados carregados User Data")
+          console.log(this.userData)
+          this.openDialog();
         },
         (err) => {
           // Manipula erro da busca de automações
@@ -284,32 +287,6 @@ export class StandardCrudeComponent implements OnChanges {
         },
       );
   }
-  private loadSystems(headers: HttpHeaders) {
-    this.http
-      .get<SystemResponse>(`${this.config.environment}/systems/toSelect`, { headers })
-      .subscribe(
-        (response: SystemResponse) => {
-          this.systemData = response.data.map(item => ({
-            'ID': item.sys_id,
-            'Status': item.sys_status,
-            'Nome': item.sys_name,
-            'Descrição': item.sys_description,
-            'Credencial': item.sys_credential,
-            'Secret': item.sys_secret,
-            'URL': item.sys_url,
-            'Segurança': item.sys_security,
-            'Pasta': item.sys_path,
-            'Data criação': item.sys_created_at,
-            'Data atualização': item.sys_updated_at,
-          }));
-          this.openDialog();
-        },
-        (err) => {
-          // Manipula erro da busca de automações
-          this.handleError(err);
-        },
-      );
-  }
 
   private openDialog() {
     this.isLoading = false; // Desativa o loading após todas as requisições
@@ -338,18 +315,25 @@ export class StandardCrudeComponent implements OnChanges {
       });
     }
 
-    if (this.config.modal === 'system-modal') {
-      const dialogRef: MatDialogRef<SystemModalComponent> = this.dialog.open(SystemModalComponent, {
+    if (this.config.modal === 'Ufs') {
+
+      const dialogRef: MatDialogRef<UfModalComponent> = this.dialog.open(UfModalComponent, {
         width: '50%',
         maxWidth: '2000px',
-        height: '63%',
+        height: '75%',
         panelClass: 'custom-dialog-container',
-        data: { registerData: this.systemData, config: this.config }
+        data: {
+          registerData: this.ufData,
+          config: this.config
+        }
       });
       // Quando o diálogo for fechado
       dialogRef.afterClosed().subscribe(() => {
         this.closeAndReturn();
+        this.permissionData = []
         this.systemData = []
+        this.userData = []
+        this.profileData = []
       });
     }
 
@@ -393,14 +377,14 @@ export class StandardCrudeComponent implements OnChanges {
         const recordObject = record ? JSON.parse(JSON.stringify(record)) : null;
         const id = recordObject?.ID;
 
-        if (this.config.modal == 'system-modal') {
-          this.isLoading = true;
-          this.deleteSystem(id)
-        }
-
         if (this.config.modal == 'Custom-Users') {
           this.isLoading = true;
           this.deleteUser(id)
+        }
+
+        if (this.config.modal == 'Ufs') {
+          this.isLoading = true;
+          this.deleteUf(id)
         }
       }
     });
@@ -439,6 +423,29 @@ export class StandardCrudeComponent implements OnChanges {
       .delete<ApiResponse>(`${this.config.environment}/${this.config.apiRoute}/${params.usr_id}`, { headers })
       .subscribe(
         (response: ApiResponse) => {
+          Swal.fire('Deletado!', 'O usuário foi deletada com sucesso.', 'success');
+          this.isLoading = false;
+          this.closeAndReturn();
+        },
+        (err) => {
+          this.handleError(err);
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
+  }
+
+  deleteUf(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.config.token}`,
+      UserId: sessionStorage.getItem('usr_id') || '',
+    });
+    const params = { uf_id: id };
+    this.http
+      .delete<ApiUfResponse>(`${this.config.environment}/${this.config.apiRoute}/${params.uf_id}`, { headers })
+      .subscribe(
+        (response: ApiUfResponse) => {
           Swal.fire('Deletado!', 'O usuário foi deletada com sucesso.', 'success');
           this.isLoading = false;
           this.closeAndReturn();

@@ -1,0 +1,84 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div class="modal">
+    <!-- Cabeçalho do Modal -->
+    <div class="modal-header">
+      <h1 class="modal-title">Cadastro de usuários</h1>
+      <button type="button" class="close-btn" (click)="close()">✖</button>
+    </div>
+
+    <!-- Abas do Modal -->
+    <div class="modal-tabs">
+      <button (click)="switchTab(0)" [class.active]="activeTab === 0">Dados usuário</button>
+      <!--<button (click)="switchTab(1)" [class.active]="activeTab === 1">Permissionamento</button>-->
+      <!--<button (click)="switchTab(2)" [class.active]="activeTab === 2">Permissões WhatsApp</button> -->
+    </div>
+
+    <!-- Corpo do Modal -->
+    <div class="modal-body">
+      <ng-container [ngSwitch]="activeTab">
+        <!-- Conteúdo da Aba 1 -->
+        <div *ngSwitchCase="0" class="scrollable-content">
+          <div class="form-grid3">
+
+            <div class="form-group">
+              <label for="uf_code"><strong>UF</strong></label>
+              <input type="text" id="uf_code" formControlName="uf_code" placeholder="Digite o UF do estado"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('uf_code')?.invalid && form.get('uf_code')?.touched" class="error">
+                UF é obrigatorio
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="uf_name"><strong>Nome do Estado</strong></label>
+              <input type="text" id="uf_name" formControlName="uf_name" placeholder="Digite o Nome do Estado"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('uf_name')?.invalid && form.get('uf_name')?.touched" class="error">
+                Nome do Estado é obrigatório
+              </div>
+            </div>
+
+            <div class="form-grid1">
+              <div class="form-group">
+                <label for="uf_state"><strong>Status</strong></label>
+                <select id="uf_state" formControlName="uf_state" [disabled]="!isEditing">
+                  <option [ngValue]="true">Ativo</option>
+                  <option [ngValue]="false">Inativo</option>
+                </select>
+                <div *ngIf="form.get('uf_state')?.invalid && form.get('uf_state')?.touched" class="error">
+                  Status do status é obrigatório
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="form-group">
+              <label for="uf_ibge_code"><strong>Código IBGE</strong></label>
+              <input type="text" id="uf_ibge_code" formControlName="uf_ibge_code"
+                placeholder="Digite o código IBGE do estado" [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('uf_ibge_code')?.invalid && form.get('uf_ibge_code')?.touched" class="error">
+                Código IBGE é obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="uf_region"><strong>Região da UF</strong></label>
+              <input type="text" id="uf_region" formControlName="uf_region" placeholder="Digite a região da UF"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('uf_region')?.invalid && form.get('uf_region')?.touched" class="error">
+                Região da UF é obrigatória
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Rodapé do Modal -->
+    <div class="modal-footer">
+      <button type="button" (click)="close()" class="btn-cancel">Cancelar</button>
+      <button type="submit" id="saveButton" (click)="onSaveClick($event)" class="btn-save">Salvar</button>
+    </div>
+  </div>
+</form>

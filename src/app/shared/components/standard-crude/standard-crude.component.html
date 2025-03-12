@@ -40,7 +40,7 @@
           <td *ngFor="let column of columns; let i = index">
             <span *ngIf="(i === 0 || (i >= 7 && i <= 14)) && 
                          ((config.modal === 'Custom-Users') || 
-                         (config.modal === 'system-modal') || 
+                         (config.modal === 'Ufs') || 
                          (config.modal === 'processList') || 
                          (config.modal === 'uploads')); else normalContent" [ngClass]="{
                      'status-active': row[column] === true || row[column] === 1, 

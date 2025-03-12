@@ -12,12 +12,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PostCreateUser } from '../../shared/interfaces/users.interfaces'
 
-interface Systems {
-  sys_id: number;
-}
-interface Permissions {
-  pms_id: number;
-}
 interface sys {
   ID: number;
 }
