@@ -31,6 +31,15 @@
             </div>
 
             <div class="form-group">
+              <label for="uf_days"><strong>Dias Conclusão</strong></label>
+              <input type="text" id="uf_days" formControlName="uf_days" placeholder="Digite a quantidade de dias"
+                [attr.disabled]="!isEditing ? true : null" />
+              <div *ngIf="form.get('uf_days')?.invalid && form.get('uf_days')?.touched" class="error">
+                Quantidade de dias é obrigatório
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="uf_name"><strong>Nome do Estado</strong></label>
               <input type="text" id="uf_name" formControlName="uf_name" placeholder="Digite o Nome do Estado"
                 [attr.disabled]="!isEditing ? true : null" />

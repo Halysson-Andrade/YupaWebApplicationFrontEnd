@@ -25,6 +25,7 @@ export class UfModalComponent {
   data: PostCreateUF = {
     uf_code: '',
     uf_name: '',
+    uf_days:0,
     uf_ibge_code: '',
     uf_region: '',
     uf_state: true,
@@ -48,6 +49,7 @@ export class UfModalComponent {
     this.form = this.fb.group({
       uf_code: ['', Validators.required],
       uf_state: [true, Validators.required],
+      uf_days: [0, Validators.required],
       uf_name: ['', Validators.required],
       uf_ibge_code: ['', Validators.required],
       uf_region: ['', Validators.required],
@@ -62,6 +64,7 @@ export class UfModalComponent {
       this.form.patchValue({
         uf_code: registerData.UF || '',
         uf_name: registerData.Nome || '',
+        uf_days: registerData['Dias conclusão'] || 0,
         uf_ibge_code: registerData.IBGE || '',
         uf_region: registerData.Região || '',
         uf_state: registerData.Status === true || registerData.Status === 'true' // Garante que será booleano

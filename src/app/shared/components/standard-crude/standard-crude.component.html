@@ -25,7 +25,7 @@
     <table>
       <thead>
         <tr>
-          <th *ngFor="let column of columns" (click)="sortData(column)">
+          <th *ngFor="let column of columns" (click)="sortData(column)" style="text-align: center;">
             {{ column }}
             <span *ngIf="sortColumn === column">
               {{ sortDirection === 'asc' ? '▲' : '▼' }}
@@ -35,42 +35,96 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of paginatedData">
+        <tr *ngFor="let row of paginatedData" [ngClass]="{ 'hover-active': isHovered === row }"
+          (mouseenter)="isHovered = row" (mouseleave)="isHovered = null">
+          {{ resetAguardando() }} <!-- Reseta a flag após exibir o ícone -->
           <!-- Aplica a condição somente se config.modal for 'imports' e apenas na primeira coluna -->
           <td *ngFor="let column of columns; let i = index">
-            <span *ngIf="(i === 0 || (i >= 7 && i <= 14)) && 
+            <span *ngIf="(i === 0 || (i >= 6 && i <= 13)) && 
                          ((config.modal === 'Custom-Users') || 
-                         (config.modal === 'Ufs') || 
-                         (config.modal === 'processList') || 
-                         (config.modal === 'uploads')); else normalContent" [ngClass]="{
-                     'status-active': row[column] === true || row[column] === 1, 
-                     'status-inactive': row[column] === false || row[column] === 0
-                   }">
-              <!-- Exibe '🚫' ou '✅' para as colunas de índice 7 a 14 e 'Ativo' ou 'Inativo' para a coluna 0 -->
-              {{ (i === 0) ? (row[column] === false || row[column] === 0 ? 'Inativo' :
-              (row[column] === true || row[column] === 1 ? 'Ativo' : 'Desconhecido')) :
-              (row[column] === false || row[column] === 0 ? 'Nok' :
-              (row[column] === true || row[column] === 1 ? 'Ok' : '')) }}
+                          (config.modal === 'Ufs') || 
+                          (config.modal === 'processList') || 
+                          (config.modal === 'uploads')); else normalContent" [ngClass]="(i === 0) ? {
+                    'status-active': row[column] === true || row[column] === 1, 
+                    'status-inactive': row[column] === false || row[column] === 0,
+                    'status-unknown': row[column] !== true && row[column] !== false && row[column] !== 1 && row[column] !== 0
+                  } : {}">
+
+              <!-- Exibe 'Ativo' ou 'Inativo' para a coluna 0 -->
+              <ng-container *ngIf="i === 0">
+                {{ row[column] === false || row[column] === 0 ? 'Inativo' :
+                (row[column] === true || row[column] === 1 ? 'Ativo' : 'Aguard.') }}
+
+                <!-- Chama a função se o valor for "Aguard." -->
+                <ng-container
+                  *ngIf="row[column] !== true && row[column] !== false && row[column] !== 1 && row[column] !== 0">
+                  {{ setAguardando(true) }}
+                </ng-container>
+              </ng-container>
+
+              <!-- Exibe 🚫, ✅ ou um ícone de carregamento para colunas de índice 7 a 14 -->
+              <ng-container *ngIf="i >= 6 && i <= 13">
+                <!-- Ícone "Aguardando" 🔄 -->
+                <ng-container *ngIf="aguardandoFlag; else statusIcons">
+                  <span (click)="openMenu(row, column, $event)" class="icon-link">
+                    🔄
+                  </span>
+                </ng-container>
+
+                <!-- Exibe 🚫 ou ✅ caso aguardandoFlag seja false -->
+                <ng-template #statusIcons>
+                  <span (click)="openMenu(row, column, $event)" class="icon-link">
+                    <ng-container *ngIf="row[column] === false || row[column] === 0">🚫</ng-container>
+                    <ng-container *ngIf="row[column] === true || row[column] === 1">✅</ng-container>
+                  </span>
+                </ng-template>
+              </ng-container>
+
+              <!-- Modal Dropdown para seleção -->
+              <div *ngIf="isMenuOpen" class="status-menu" [ngStyle]="menuPosition">
+                <button (click)="updateStatus(true)">✅ Check</button>
+                <button (click)="updateStatus(false)">🚫 Não Check</button>
+              </div>
+
+
+              <!-- Modal Dropdown para seleção -->
+              <div *ngIf="isMenuOpen" class="status-menu" [ngStyle]="menuPosition">
+                <button (click)="updateStatus(true)">✅ Check</button>
+                <button (click)="updateStatus(false)">🚫 Não Check</button>
+              </div>
+
+
             </span>
 
             <!-- Exibe o valor normal para outras colunas ou se config.modal for diferente de 'companies' -->
             <ng-template #normalContent>{{ row[column] }}</ng-template>
           </td>
-
-
-
           <!-- Botões de ação -->
-          <td class="action-buttons" *ngIf="config.modal !== 'uploads'">
-            <button class="edit-button" (click)="editRecord(row)" aria-label="Editar registro">
+          <td class="action-buttons" *ngIf="config.modal !== 'uploads' && config.modal !== 'processList'">
+            <button class="edit-button" (click)="editRecord(row)" aria-label="Editar registro"
+              matTooltip="Editar registro">
               <i class="ph-bold ph-pencil"></i>
             </button>
-            <button mat-icon-button class="delete-button" (click)="deleteRecord(row)" aria-label="Deletar registro">
+            <button mat-icon-button class="delete-button" (click)="deleteRecord(row)" aria-label="Deletar registro"
+              matTooltip="Deletar registro">
               <i class="ph-bold ph-trash"></i>
             </button>
             <button *ngIf="config.modal === 'imports'" class="aprove-button" (click)="aproveRecord(row)"
               aria-label="Aprovar registro">
               <i class="ph-bold ph-check-fat"></i>
             </button>
+          </td>
+
+          <td class="action-buttons" *ngIf="config.modal == 'processList'" style="align-items: center;">
+            <button class="upload-button" (click)="editRecord(row)" matTooltip="Importar documentações"
+              aria-label="Importar documentações">
+              <i class="ph-bold ph-upload"></i>
+            </button>
+            <button class="printer-button" (click)="editRecord(row)" matTooltip="Imprimir resultado"
+              aria-label="Editar registro">
+              <i class="ph-bold ph-printer"></i>
+            </button>
+
           </td>
         </tr>
       </tbody>

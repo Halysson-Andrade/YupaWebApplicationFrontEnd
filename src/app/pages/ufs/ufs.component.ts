@@ -72,6 +72,7 @@ environment = environment;
               this.data = response.data.map(item => ({
                 'Status': item.uf_state,
                 'ID': item.uf_id,
+                'Dias conclusão': item.uf_days,
                 'UF': item.uf_code,                
                 'Nome': item.uf_name,
                 'IBGE': item.uf_ibge_code,

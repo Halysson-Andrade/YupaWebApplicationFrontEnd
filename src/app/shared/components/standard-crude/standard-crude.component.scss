@@ -145,6 +145,7 @@ select {
 
 // Estilização da tabela
 .table-container {
+  text-align: center;
   max-width: 1740px;
   overflow-x: auto;
   margin-bottom: 20px;
@@ -183,14 +184,18 @@ table {
       }
     }
   }
+  .hover-active {
+    background-color: #e0f7fa; /* Cor diferente ao passar o mouse */
+  }
 
   tbody {
+    
     tr {
       border-bottom: solid 1px #F7F8F9;
 
       &:last-child {
         border: none;
-      }
+      }      
 
       td {
         font-size: 0.9rem;
@@ -241,6 +246,29 @@ table {
             background-color: #d94b4b;
           }
         }
+
+        ::ng-deep .status-unknown {
+          border: solid 1px #d4d4d8;
+          width: 1;
+          border-radius: 1rem;
+          background-color: #FFF;
+          font-weight: 600;
+          padding: 0.2rem 1rem 0.2rem 1.5rem;
+          position: relative;
+          font-size: 0.8rem;
+          text-wrap: nowrap;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4a36e2;
+          }
+        }
       }
     }
   }
@@ -265,6 +293,14 @@ table {
 
       &.edit-button {
         color: #4CAF50;
+      }
+
+      &.upload-button {
+        color: #a242ba;
+      }
+
+      &.printer-button {
+        color: #49bfd1;
       }
 
       &.delete-button {
@@ -338,4 +374,37 @@ table {
     flex-direction: column;
     overflow: hidden;
   }
+}
+
+.icon-link {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.status-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.status-menu button {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.status-menu button:hover {
+  background: #f0f0f0;
 }

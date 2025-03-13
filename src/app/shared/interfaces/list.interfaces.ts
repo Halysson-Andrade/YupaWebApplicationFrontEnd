@@ -22,18 +22,18 @@ export interface ApiListResponse {
 
 export interface ListData {
   'Status': number;
-  'ID_importação': number;
-  'Placa do Carro': string;
+ 
+  'Placa': string;
   'Lote':string;
-  'Tranferencia UF ':string
-  'Data Inicio': string;
-  'Previsao de Conclusao ': string;
-  'Kit doc Completo': boolean;
+  'UF ':string
+  'Inicio': string;
+  'Conclusao ': string;
+  'Kit': boolean;
   'Restricoes': boolean;
-  'Debitos Veiculares': boolean;
-  'Comunicacao de Venda': boolean;
-  'Vistoria Veicular': boolean;
-  'Pendencias Comprador': boolean;
-  'CRLV-e Disponível': boolean;
-  'Trocar Placa': boolean;
+  'Debitos': boolean;
+  'Venda': boolean;
+  'Vist': boolean;
+  'Pend': boolean;
+  'CRLV': boolean;
+  'Troc placa': boolean;
 }

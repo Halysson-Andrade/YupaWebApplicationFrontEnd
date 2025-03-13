@@ -20,11 +20,12 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CompanyService } from '../../../core/services/http/update-companie.service'; // Importe o serviço
 import Swal from 'sweetalert2';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-standard-crude',
   standalone: true,
-  imports: [CommonModule, ImportXlsModalComponent, MatDialogModule, SharedModule],
+  imports: [CommonModule, ImportXlsModalComponent, MatDialogModule, SharedModule,MatTooltipModule],
   templateUrl: './standard-crude.component.html',
   styleUrls: ['./standard-crude.component.scss']
 })
@@ -36,6 +37,7 @@ export class StandardCrudeComponent implements OnChanges {
   })
   private returnToParentSource = new Subject<void>();
   returnToParent$ = this.returnToParentSource.asObservable();
+  isHovered: any = null;
   permissionData: PermissionData[] = []
   systemData: Data[] = []
   userData: UserData[] = []
@@ -51,6 +53,10 @@ export class StandardCrudeComponent implements OnChanges {
   pageTitle: string = '';
   isLoading = false;
   errorMessage: string = '';
+  selectedRow: any = null; // Guarda a linha selecionada
+  selectedColumn: any = null; // Guarda a coluna selecionada
+  isMenuOpen = false; // Controla se o menu de seleção está aberto
+  menuPosition = { top: '0px', left: '0px' }; // Guarda a posição do menu
 
   constructor(
     private dialog: MatDialog,
@@ -71,6 +77,47 @@ export class StandardCrudeComponent implements OnChanges {
       this.updatePagination();
     }
   }
+  openMenu(row: any, column: any, event: MouseEvent) {
+    event.preventDefault(); // Evita que o link redirecione a página
+    event.stopPropagation(); // Evita que o clique feche automaticamente
+
+    this.selectedRow = row;
+    this.selectedColumn = column;
+    this.isMenuOpen = true;
+
+    // Posiciona o menu próximo ao clique
+    this.menuPosition = {
+      top: `${event.clientY + 10}px`,
+      left: `${event.clientX}px`
+    };
+  }
+
+  updateStatus(value: boolean) {
+    if (this.selectedRow && this.selectedColumn) {
+      this.selectedRow[this.selectedColumn] = value ? 1 : 0; // Atualiza localmente
+
+      // Simula chamada API (substitua pelo seu serviço real)
+      this.simulateApiPut(this.selectedRow.id, this.selectedColumn, value)
+        .then(() => {
+          console.log(`Status atualizado: ${value ? '✅ Check' : '🚫 Não Check'}`);
+          this.isMenuOpen = false; // Fecha o menu após atualização
+        })
+        .catch((error) => {
+          console.error("Erro ao atualizar:", error);
+        });
+    }
+  }
+
+  async simulateApiPut(rowId: number, column: string, value: boolean) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(`PUT enviado para ID ${rowId}, coluna ${column} com valor ${value}`);
+        resolve(true);
+      }, 1000);
+    });
+  }
+
+  
   updatePagination(data: any[] = this.data) {
     this.totalPages = Math.ceil(data.length / this.pageSize);
     this.paginatedData = data.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize);
@@ -215,6 +262,15 @@ export class StandardCrudeComponent implements OnChanges {
         },
       );
   }
+  aguardandoFlag = false; // Variável para indicar quando há "Aguard."
+
+  setAguardando(flag: boolean) {
+    this.aguardandoFlag = flag;
+    console.log("Aguardando detectado:", this.aguardandoFlag);
+  }
+  resetAguardando() {
+    this.aguardandoFlag = false;
+  }
 
   private loadUf(headers: HttpHeaders, id: number) {
     console.log(this.config.apiRoute)
@@ -228,6 +284,7 @@ export class StandardCrudeComponent implements OnChanges {
           this.ufData = response.data.map(item => ({
             'ID': item.uf_id,
             'UF': item.uf_code,
+            'Dias conclusão': item.uf_days,
             'Status': item.uf_state,
             'Nome': item.uf_name,
             'IBGE': item.uf_ibge_code,
