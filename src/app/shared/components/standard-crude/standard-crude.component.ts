@@ -116,6 +116,9 @@ export class StandardCrudeComponent implements OnChanges {
       }, 1000);
     });
   }
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 
   
   updatePagination(data: any[] = this.data) {

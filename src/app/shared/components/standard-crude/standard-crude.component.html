@@ -80,15 +80,8 @@
                 </ng-template>
               </ng-container>
 
-              <!-- Modal Dropdown para seleção -->
-              <div *ngIf="isMenuOpen" class="status-menu" [ngStyle]="menuPosition">
-                <button (click)="updateStatus(true)">✅ Check</button>
-                <button (click)="updateStatus(false)">🚫 Não Check</button>
-              </div>
-
-
-              <!-- Modal Dropdown para seleção -->
-              <div *ngIf="isMenuOpen" class="status-menu" [ngStyle]="menuPosition">
+              <div *ngIf="isMenuOpen && selectedRow === row && selectedColumn === column" class="status-menu"
+                [ngStyle]="menuPosition" (mouseleave)="closeMenu()">
                 <button (click)="updateStatus(true)">✅ Check</button>
                 <button (click)="updateStatus(false)">🚫 Não Check</button>
               </div>
