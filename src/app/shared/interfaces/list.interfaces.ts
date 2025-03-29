@@ -21,8 +21,7 @@ export interface ApiListResponse {
 }
 
 export interface ListData {
-  'Status': number;
- 
+  'Status': number; 
   'Placa': string;
   'Lote':string;
   'UF ':string

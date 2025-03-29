@@ -13,7 +13,8 @@
 
     /* Container para os inputs e botão de filtro */
     .filter-container {
-      display: flex;
+      align-content:space-evenly;
+      padding-left: 20px;
       height: 100px;
       width: 100%;
       gap: 60px;

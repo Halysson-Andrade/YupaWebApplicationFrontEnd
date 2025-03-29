@@ -53,11 +53,13 @@
               <!-- Exibe 'Ativo' ou 'Inativo' para a coluna 0 -->
               <ng-container *ngIf="i === 0">
                 {{ row[column] === false || row[column] === 0 ? 'Inativo' :
-                (row[column] === true || row[column] === 1 ? 'Ativo' : 'Aguard.') }}
+                (row[column] === true || row[column] === 1 ? 'Ativo' :
+                (row[column] === true || row[column] === 3 ? 'Done' : 'Aguard.')
+                ) }}
 
                 <!-- Chama a função se o valor for "Aguard." -->
                 <ng-container
-                  *ngIf="row[column] !== true && row[column] !== false && row[column] !== 1 && row[column] !== 0">
+                  *ngIf="row[column] !== true && row[column] !== false && row[column] !== 1 && row[column] !== 0 && row[column] !== 3">
                   {{ setAguardando(true) }}
                 </ng-container>
               </ng-container>
@@ -82,8 +84,8 @@
 
               <div *ngIf="isMenuOpen && selectedRow === row && selectedColumn === column" class="status-menu"
                 [ngStyle]="menuPosition" (mouseleave)="closeMenu()">
-                <button (click)="updateStatus(true)">✅ Check</button>
-                <button (click)="updateStatus(false)">🚫 Não Check</button>
+                <button (click)="updateStatus(true,row)">✅ Check</button>
+                <button (click)="updateStatus(false,row)">🚫 Não Check</button>
               </div>
 
 

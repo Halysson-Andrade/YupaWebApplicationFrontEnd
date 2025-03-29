@@ -130,24 +130,7 @@ export class ChartsComponent implements OnInit {
         Authorization: `Bearer ${token}`,
         UserId: this.userId,
       });
-
-      this.http
-        .get<CentroCustoResponse>(`${this.environment.apiURL}/filter`, { headers })
-        .subscribe(
-          (response: CentroCustoResponse) => {
-            // Extrair apenas os valores de `cc_system_code` para um novo array
-            this.items = response.data.map(filter => filter.flt_name);
-            console.log(this.items);  // Exibe o array com os códigos no console
-          },
-          (err) => {
-            this.isLoading = false;
-            this.errorMessage = this.extractErrorMessage(err);
-            this.toastr.error(this.errorMessage);
-          },
-          () => {
-            this.isLoading = false; // Oculta o componente de loading
-          }
-        );
+      this.loadCharts()
     } else {
       console.error('Token de autenticação não encontrado.');
       this.isLoading = false; // Garante que o loader seja ocultado mesmo se o token não for encontrado
@@ -252,7 +235,7 @@ export class ChartsComponent implements OnInit {
       };
 
       this.http
-        .post<ApiResponse>(`${this.environment.apiURL}/charts`, body, { headers, params })
+        .get<ApiResponse>(`${this.environment.apiURL}/charts`, { headers, params })
         .subscribe(
           (response: ApiResponse) => {
             this.techniciansData = response.data.EChartsData.techniciansData;

@@ -21,11 +21,12 @@ import { Subject } from 'rxjs';
 import { CompanyService } from '../../../core/services/http/update-companie.service'; // Importe o serviço
 import Swal from 'sweetalert2';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ApiListResponse } from '../../interfaces/list.interfaces';
 
 @Component({
   selector: 'app-standard-crude',
   standalone: true,
-  imports: [CommonModule, ImportXlsModalComponent, MatDialogModule, SharedModule,MatTooltipModule],
+  imports: [CommonModule, ImportXlsModalComponent, MatDialogModule, SharedModule, MatTooltipModule],
   templateUrl: './standard-crude.component.html',
   styleUrls: ['./standard-crude.component.scss']
 })
@@ -92,35 +93,54 @@ export class StandardCrudeComponent implements OnChanges {
     };
   }
 
-  updateStatus(value: boolean) {
+  updateStatus(value: boolean, record: any) {
     if (this.selectedRow && this.selectedColumn) {
       this.selectedRow[this.selectedColumn] = value ? 1 : 0; // Atualiza localmente
 
       // Simula chamada API (substitua pelo seu serviço real)
-      this.simulateApiPut(this.selectedRow.id, this.selectedColumn, value)
-        .then(() => {
-          console.log(`Status atualizado: ${value ? '✅ Check' : '🚫 Não Check'}`);
-          this.isMenuOpen = false; // Fecha o menu após atualização
-        })
+      this.updateState(this.selectedRow.Placa, this.selectedColumn, value)
         .catch((error) => {
           console.error("Erro ao atualizar:", error);
         });
     }
   }
 
-  async simulateApiPut(rowId: number, column: string, value: boolean) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(`PUT enviado para ID ${rowId}, coluna ${column} com valor ${value}`);
-        resolve(true);
-      }, 1000);
+  async updateState(rowId: number, column: string, value: boolean) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.config.token}`,
+      UserId: sessionStorage.getItem('usr_id') || '',  // Tratando null ou undefined
     });
+    const body = {
+      car_plate: rowId,
+      column: column,
+      value: value,
+    };
+    this.isLoading = true;
+    this.http
+      .put<ApiListResponse>(`${this.config.environment}/uploads`, body, { headers })
+      .subscribe(
+        (response) => {
+          this.toastr.success('Status atualizado com sucesso!');
+          this.isMenuOpen = false; // Fecha o menu após atualização
+          this.isLoading = false;
+          this.closeAndReturn();
+        },
+        (err) => {
+          this.isLoading = false;
+          this.errorMessage = this.extractErrorMessage(err);
+          this.toastr.error(this.errorMessage);
+        },
+        () => {
+          // Define isLoading como false quando o carregamento estiver concluído
+          this.isLoading = false;
+        }
+      );
   }
   closeMenu() {
     this.isMenuOpen = false;
   }
 
-  
+
   updatePagination(data: any[] = this.data) {
     this.totalPages = Math.ceil(data.length / this.pageSize);
     this.paginatedData = data.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize);

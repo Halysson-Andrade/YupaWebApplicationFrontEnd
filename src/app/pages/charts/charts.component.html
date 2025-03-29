@@ -8,7 +8,6 @@
 
       </div>
       <div class="date-filter">
-        Filtro de data
         <input type="text" [value]="startDateInput" (input)="onStartDateInput($event)" placeholder="Data Início"
           maxlength="10" pattern="\d{2}/\d{2}/\d{4}" title="Digite a data no formato DD/MM/YYYY">
         <input type="text" [value]="endDateInput" (input)="onEndDateInput($event)" placeholder="Data Fim" maxlength="10"
@@ -38,7 +37,7 @@
 
 
         <div class="chart-container">
-          <p class="chart-title">Processos por dia</p>
+          <p class="chart-title">Previsão de finalização</p>
           <div echarts [options]="chartBarSumary" class="charts-bar" (chartInit)="onChartInit($event, 'barSumary')">
           </div>
         </div>
